@@ -22,9 +22,35 @@ public class HalloweenTrickTreat {
         String message = Halloween.trickOrTreat(3,new String[][] {{"candy","apple","candy"},{"candy","candy","apple"},{"candy","apple","candy"}});
         Assert.assertEquals("Thank you, strange uncle!",message);
     }
+
     @Test
     public void should_have_same_amount_ofCandies(){
         String message = Halloween.trickOrTreat(3,new String[][] {{"candy","apple","candy"},{"candy","candy","apple"},{"candy","candy","candy"}});
         Assert.assertEquals("Trick or treat!",message);
     }
+
+    @Test
+    public void should_have_packets_forAll_children(){
+        String message = Halloween.trickOrTreat(4,new String[][] {{"candy","apple","candy"},{"candy","candy","apple"},{"candy","apple","candy"}});
+        Assert.assertEquals("Trick or treat!",message);
+    }
+
+    @Test
+    public void not_enough_packets_forAll_children(){
+        String message = Halloween.trickOrTreat(3,new String[][] {{"candy","apple","candy"},{"candy","candy","apple"},{"apple","apple","candy"},{"candy","bomb","candy"}});
+        Assert.assertEquals("Trick or treat!",message);
+    }
+
+    @Test
+    public void enough_packets_afterFiltering_forAll_children(){
+        String message = Halloween.trickOrTreat(2,new String[][] {{"candy","apple","candy"},{"candy","candy","apple"},{"candy","candy","candy"},{"candy","bomb","candy"}});
+        Assert.assertEquals("Thank you, strange uncle!",message);
+    }
+
+    @Test
+    public void more_packets_afterFiltering_forAll_children(){
+        String message = Halloween.trickOrTreat(2,new String[][] {{"candy","apple","candy"},{"candy","candy","apple"},{"candy","candy","candy"},{"candy","bomb","candy"}});
+        Assert.assertEquals("Thank you, strange uncle!",message);
+    }
+
 }

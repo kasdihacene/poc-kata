@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds" debug="true">
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36}:%L - %X{service} %X{trt} %X{corelid} %msg %n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/log_pocs.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover yyyy-MM-dd-HH-mm -->
+            <fileNamePattern>logs/archive/log_pocs.%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <maxFileSize>1MB</maxFileSize>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>100</maxHistory>
+            <!-- exemple: 1GB 1MB-->
+            <totalSizeCap>10MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36}:%L - %X{service} %X{trt} %X{corelid} %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>
