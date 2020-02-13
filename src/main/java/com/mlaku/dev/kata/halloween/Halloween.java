@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 public class Halloween {
 
-    private static String PACKET_BOMB = "bomb";
-    private static String PACKET_CANDY = "candy";
-    private static String KO_MESSAGE = "Trick or treat!";
-    private static String OK_MESSAGE = "Thank you, strange uncle!";
+    private static final String BOMB = "bomb";
+    private static final String CANDY = "candy";
+    private static final String KO_MESSAGE = "Trick or treat!";
+    private static final String OK_MESSAGE = "Thank you, strange uncle!";
 
     public static String trickOrTreat(int nbrChildren, String[][] packets) {
 
@@ -28,21 +28,21 @@ public class Halloween {
 
     private static boolean isPacketsCouldSatisfyChildren(int nbrChildren, List<Map<String, Long>> groupedTypes) {
 
-        List<Map.Entry<String, Long>> listMapPackets = groupedTypes.stream().map(g -> g.entrySet())
+        List<Map.Entry<String, Long>> listMapPackets = groupedTypes.stream().map(Map::entrySet)
                 .collect(Collectors.toList()).stream()
                 .flatMap(Collection::stream).collect(Collectors.toList());
 
         Optional<Map.Entry<Long, Long>> pickPossibility = listMapPackets.stream()
-                .filter(entry -> entry.getKey().equalsIgnoreCase(PACKET_CANDY)).collect(Collectors.toList()).stream()
-                .collect(Collectors.groupingBy(typeNbrEntries -> typeNbrEntries.getValue(), Collectors.counting()))
+                .filter(entry -> entry.getKey().equalsIgnoreCase(CANDY)).collect(Collectors.toList()).stream()
+                .collect(Collectors.groupingBy(Map.Entry::getValue, Collectors.counting()))
                 .entrySet().stream().filter(x -> x.getValue() == nbrChildren).findFirst();
 
         return pickPossibility.isPresent();
     }
 
     private static boolean filterGroupedPacketsByBusinessRules(Map<String, Long> group) {
-        if (group.containsKey(PACKET_BOMB)) return false;
-        if (group.containsKey(PACKET_CANDY) && group.get(PACKET_CANDY) < 2) return false;
+        if (group.containsKey(BOMB)) return false;
+        if (group.containsKey(CANDY) && group.get(CANDY) < 2) return false;
         return true;
     }
 }

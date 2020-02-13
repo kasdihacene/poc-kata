@@ -53,4 +53,10 @@ public class HalloweenTrickTreat {
         Assert.assertEquals("Thank you, strange uncle!",message);
     }
 
+    @Test
+    public void more_packets_withChoice_afterFiltering_forAll_children(){
+        String message = Halloween.trickOrTreat(2,new String[][] {{"candy","apple","candy"},{"candy","candy","apple"},{"candy","candy","candy"},{"candy","bomb","candy"},{"candy","candy","candy"}});
+        Assert.assertEquals("Thank you, strange uncle!",message);
+    }
+
 }
