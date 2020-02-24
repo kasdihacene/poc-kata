@@ -14,3 +14,6 @@ https://www.codewars.com/kata/55e7280b40e1c4a06d0000aa
 
 > KATA Halloween (Halloween Trick or Treat)
 https://www.codewars.com/kata/halloween-trick-or-treat
+
+> How many numbers III (Combinations)
+https://www.codewars.com/kata/5877e7d568909e5ff90017e6
