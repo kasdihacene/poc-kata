@@ -17,3 +17,9 @@ https://www.codewars.com/kata/halloween-trick-or-treat
 
 > How many numbers III (Combinations)
 https://www.codewars.com/kata/5877e7d568909e5ff90017e6
+
+> KATA : Fun with trees: array to tree (Create a binary tree from an array)
+https://www.codewars.com/kata/57e5a6a67fbcc9ba900021cd
+
+> KATA : max sum elements of the tree
+https://www.codewars.com/kata/57e5279b7cf1aea5cf000359/train/java
