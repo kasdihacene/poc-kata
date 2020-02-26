@@ -20,7 +20,6 @@ class ArrayTreeNode {
 
     @Override
     public boolean equals(Object other) {
-        boolean equals = true;
         if (other instanceof ArrayTreeNode) {
             ArrayTreeNode otherNode = (ArrayTreeNode) other;
             return this.toString().equals(otherNode.toString());
@@ -39,6 +38,6 @@ class ArrayTreeNode {
 
     @Override
     public int hashCode() {
-        return Objects.hash(((left == null) ? "" : left), ((right == null ? "" : right)), value);
+        return Objects.hash(((left == null) ? "" : left), (right == null ? "" : right), value);
     }
 }
