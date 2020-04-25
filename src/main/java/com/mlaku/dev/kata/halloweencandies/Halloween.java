@@ -14,13 +14,17 @@ public class Halloween {
 
     public static String trickOrTreat(int nbrChildren, String[][] candies) {
 
-        if (nbrChildren < 2 || candies.length != nbrChildren) return TRICK_OR_TREAT;
+        if (atLeastTwoChildren(nbrChildren, candies)) return TRICK_OR_TREAT;
 
         if (hasBombPacket(candies).isPresent()) return TRICK_OR_TREAT;
 
         if (hasDifferentCandiesAmount(candies).isPresent()) return TRICK_OR_TREAT;
         return THANK_YOU_STRANGE_UNCLE;
 
+    }
+
+    private static boolean atLeastTwoChildren(int nbrChildren, String[][] candies) {
+        return nbrChildren < 2 || candies.length != nbrChildren;
     }
 
     private static Optional<String[]> hasBombPacket(String[][] candies) {
