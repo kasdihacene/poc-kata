@@ -11,6 +11,9 @@ public class Halloween {
     public static final String THANK_YOU_STRANGE_UNCLE = "Thank you, strange uncle!";
     public static final String BOMB = "bomb";
     public static final String CANDY = "candy";
+    public static final int MIN_NBR_CHILDREN = 2;
+    public static final int MIN_NBR_CANDIES_PER_PACKET = 2;
+    public static final int INDEX_FIRST_ELEMENT = 0;
 
     public static String trickOrTreat(int nbrChildren, String[][] candies) {
 
@@ -18,23 +21,25 @@ public class Halloween {
     }
 
     private static boolean isChildrenSatisfied(int nbrChildren, String[][] candies) {
-        return atLeastTwoChildren(nbrChildren, candies) || hasBombPacket(candies).isPresent() || hasDifferentCandiesAmount(candies).isPresent();
+        return atLeastTwoChildren(nbrChildren, candies) ||
+                hasBombPacket(candies).isPresent() ||
+                hasDifferentCandiesAmount(candies).isPresent();
     }
 
     private static boolean atLeastTwoChildren(int nbrChildren, String[][] candies) {
-        return nbrChildren < 2 || candies.length != nbrChildren;
+        return nbrChildren < MIN_NBR_CHILDREN || candies.length != nbrChildren;
     }
 
     private static Optional<String[]> hasBombPacket(String[][] candies) {
         return Arrays.stream(candies)
-                .filter(packet -> Arrays.stream(packet).anyMatch(element -> element.equals(BOMB)))
+                .filter(packet -> Arrays.asList(packet).contains(BOMB))
                 .findFirst();
     }
 
     private static Optional<Long> hasDifferentCandiesAmount(String[][] candies) {
         List<Long> nbrCandies = candiesPerPacket(candies);
         return nbrCandies.stream()
-                .filter(nbrCandiesOPacket -> nbrCandiesOPacket < 2 || nbrCandiesOPacket != nbrCandies.get(0))
+                .filter(nbrCandiesOPacket -> nbrCandiesOPacket < MIN_NBR_CANDIES_PER_PACKET || nbrCandiesOPacket != nbrCandies.get(INDEX_FIRST_ELEMENT))
                 .findFirst();
     }
 
