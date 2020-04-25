@@ -51,6 +51,12 @@ public class HalloweenCandiesTest {
     }
 
     @Test
+    public void shouldFailWhenOnlyOneChild() {
+        String[][] candies = {{"candy", "apple"}};
+        assertThat(Halloween.trickOrTreat(1, candies)).isEqualTo("Trick or treat!");
+    }
+
+    @Test
     public void returnsThankYouWhenEachChildHaveAtLeast2Candies() {
         String[][] candies = {{"candy", "candy"}, {"candy", "candy"}, {"candy", "candy"}};
         assertThat(Halloween.trickOrTreat(3, candies)).isEqualTo(Halloween.THANK_YOU_STRANGE_UNCLE);

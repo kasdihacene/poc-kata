@@ -10,14 +10,13 @@ public class Halloween {
     public static final String THANK_YOU_STRANGE_UNCLE = "Thank you, strange uncle!";
 
     public static String trickOrTreat(int nbrChildren, String[][] candies) {
-        if (candies.length == 0 || nbrChildren == 0) return TRICK_OR_TREAT;
-        if (candies.length != nbrChildren) return TRICK_OR_TREAT;
+        if (nbrChildren < 2 || candies.length != nbrChildren) return TRICK_OR_TREAT;
 
         List<Long> nbrCandies = Arrays.stream(candies)
                 .map(packet -> Arrays.stream(packet).filter(element -> element.equals("candy")).count())
                 .collect(Collectors.toList());
-        Long first = nbrCandies.get(0);
 
+        Long first = nbrCandies.get(0);
         for (int i = 0; i < nbrCandies.size(); i++) {
             if (nbrCandies.get(i) < 1 || nbrCandies.get(i) != first) return TRICK_OR_TREAT;
             first = nbrCandies.get(i);
