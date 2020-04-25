@@ -1,119 +1,41 @@
 package com.mlaku.dev.kata.halloweencandies;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HalloweenCandiesTest {
 
-    @Test
-    public void returnsThankYouWhenHaving2packetsWith2candiesFor2children() {
-        int nbrChildren = 2;
-        String[][] candies = {{"candy", "apple", "candy"}, {"candy", "candy"}};
-        String expected = "Thank you, strange uncle!";
+    public static final String THANK_YOU_STRANGE_UNCLE = "Thank you, strange uncle!";
+    public static final String TRICK_OR_TREAT = "Trick or treat!";
 
-        String result = Halloween.trickOrTreat(nbrChildren, candies);
+    @ParameterizedTest
+    @MethodSource("halloweenGenerator")
+    void shouldSatisfyAllChildrenParameterizedTest(HalloweenInput value) {
 
-        assertThat(result).isEqualTo(expected);
+        String result = Halloween.trickOrTreat(value.getNbrChildren(), value.getCandies());
+
+        assertThat(result).isEqualTo(value.getExpectedMessage());
     }
 
-    @Test
-    public void returnsTrickOrTreatWhenHavingNoChildren() {
-        int nbrChildren = 0;
-        String[][] candies = {{"candy", "apple", "candy"}, {"candy", "candy"}};
-        String expected = "Trick or treat!";
+    private static Stream<Arguments> halloweenGenerator() {
 
-        String result = Halloween.trickOrTreat(nbrChildren, candies);
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void returnsTrickOrTreatWhenHavingNoPackets() {
-        int nbrChildren = 2;
-        String[][] candies = {};
-        String expected = "Trick or treat!";
-
-        String result = Halloween.trickOrTreat(nbrChildren, candies);
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    @Test
-    public void shouldHaveTheSameNbrPacketsAndNbrChildren() {
-        String[][] candies = {{"candy", "apple"}, {"apple", "candy"}, {"candy", "apple"}};
-        int nbrChildren = 2;
-        String expected = "Trick or treat!";
-
-        String actual = Halloween.trickOrTreat(nbrChildren, candies);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void shouldFailWhenOnlyOneChild() {
-        String[][] candies = {{"candy", "apple"}};
-        int nbrChildren = 1;
-        String expected = "Trick or treat!";
-
-        String actual = Halloween.trickOrTreat(nbrChildren, candies);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void returnsThankYouWhenEachChildHaveAtLeast2Candies() {
-        String[][] candies = {{"candy", "candy"}, {"candy", "candy"}, {"candy", "candy"}};
-        int nbrChildren = 3;
-        String expected = "Thank you, strange uncle!";
-
-        String actual = Halloween.trickOrTreat(nbrChildren, candies);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void returnsTrickOrTreatWhenChildHaveOnlyOneCandy() {
-        String[][] candies = {{"candy", "candy"}, {"candy", "candy"}, {"candy", "apple"}};
-        int nbrChildren = 3;
-        String expected = "Trick or treat!";
-
-        String actual = Halloween.trickOrTreat(nbrChildren, candies);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void returnsTrickOrTreatWhenChildrenHaveDifferentAmountOfCandies() {
-        String[][] candies = {{"candy", "candy"}, {"candy", "candy"}, {"candy", "candy", "candy", "apple"}};
-        int nbrChildren = 3;
-        String actual = Halloween.trickOrTreat(nbrChildren, candies);
-
-        String expected = "Trick or treat!";
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void returnsTrickOrTreatWhenSomeChildGotABomb() {
-        String[][] candies = {{"candy", "apple", "candy"}, {"candy", "candy"}, {"candy", "bomb", "candy"}};
-        int nbrChildren = 3;
-        String expected = "Trick or treat!";
-
-        String actual = Halloween.trickOrTreat(nbrChildren, candies);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void returnsTrickOrTreatWhenChildrenHaveDifferentAmountOfCandiesWithoutDividingPackets() {
-        String[][] candies = {{"candy", "candy"}, {"candy", "candy", "candy", "candy", "candy"}, {"candy", "candy", "apple"}};
-        int nbrChildren = 3;
-        String expected = "Trick or treat!";
-
-        String actual = Halloween.trickOrTreat(nbrChildren, candies);
-
-        assertThat(actual).isEqualTo(expected);
+        return Stream.of(
+                Arguments.of(HalloweenInput.instance(2, new String[][]{{"candy", "apple", "candy"}, {"candy", "candy"}}, THANK_YOU_STRANGE_UNCLE)),
+                Arguments.of(HalloweenInput.instance(0, new String[][]{{"candy", "apple", "candy"}, {"candy", "candy"}}, TRICK_OR_TREAT)),
+                Arguments.of(HalloweenInput.instance(2, new String[][]{{"candy", "apple"}, {"apple", "candy"}, {"candy", "apple"}}, TRICK_OR_TREAT)),
+                Arguments.of(HalloweenInput.instance(1, new String[][]{{"candy", "apple"}}, TRICK_OR_TREAT)),
+                Arguments.of(HalloweenInput.instance(3, new String[][]{{"candy", "candy"}, {"candy", "candy"}, {"candy", "candy"}}, THANK_YOU_STRANGE_UNCLE)),
+                Arguments.of(HalloweenInput.instance(3, new String[][]{{"candy", "candy"}, {"candy", "candy"}, {"candy", "apple"}}, TRICK_OR_TREAT)),
+                Arguments.of(HalloweenInput.instance(3, new String[][]{{"candy", "candy"}, {"candy", "candy"}, {"candy", "candy", "candy", "apple"}}, TRICK_OR_TREAT)),
+                Arguments.of(HalloweenInput.instance(3, new String[][]{{"candy", "apple", "candy"}, {"candy", "candy"}, {"candy", "bomb", "candy"}}, TRICK_OR_TREAT)),
+                Arguments.of(HalloweenInput.instance(3, new String[][]{{"candy", "candy"}, {"candy", "candy", "candy", "candy", "candy"}, {"candy", "candy", "apple"}}, TRICK_OR_TREAT)),
+                Arguments.of(HalloweenInput.instance(2, new String[][]{}, TRICK_OR_TREAT))
+        );
     }
 
 }
