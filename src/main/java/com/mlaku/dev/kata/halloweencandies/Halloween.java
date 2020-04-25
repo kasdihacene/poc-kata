@@ -14,11 +14,9 @@ public class Halloween {
 
     public static String trickOrTreat(int nbrChildren, String[][] candies) {
 
-        if (atLeastTwoChildren(nbrChildren, candies)) return TRICK_OR_TREAT;
+        if (atLeastTwoChildren(nbrChildren, candies) || hasBombPacket(candies).isPresent() || hasDifferentCandiesAmount(candies).isPresent())
+            return TRICK_OR_TREAT;
 
-        if (hasBombPacket(candies).isPresent()) return TRICK_OR_TREAT;
-
-        if (hasDifferentCandiesAmount(candies).isPresent()) return TRICK_OR_TREAT;
         return THANK_YOU_STRANGE_UNCLE;
 
     }
