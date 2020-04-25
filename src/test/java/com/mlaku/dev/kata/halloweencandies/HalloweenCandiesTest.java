@@ -7,11 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HalloweenCandiesTest {
 
     @Test
-    public void init() {
-        assertThat(true).isTrue();
-    }
-
-    @Test
     public void returnsThankYouWhenHaving2packetsWith2candiesFor2children() {
         String result = Halloween.trickOrTreat(2, new String[][]{{"candy", "apple", "candy"}, {"candy", "candy"}});
         assertThat(result).isEqualTo("Thank you, strange uncle!");

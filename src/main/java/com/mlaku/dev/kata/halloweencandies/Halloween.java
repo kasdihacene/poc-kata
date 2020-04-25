@@ -13,15 +13,12 @@ public class Halloween {
     public static final String CANDY = "candy";
 
     public static String trickOrTreat(int nbrChildren, String[][] candies) {
-        boolean rule1 = nbrChildren < 2 || candies.length != nbrChildren;
-        if (rule1) return TRICK_OR_TREAT;
 
-        Optional<String[]> bombPacket = hasBombPacket(candies);
-        if (bombPacket.isPresent()) return TRICK_OR_TREAT;
+        if (nbrChildren < 2 || candies.length != nbrChildren) return TRICK_OR_TREAT;
 
-        List<Long> nbrCandies = candiesPerPacket(candies);
+        if (hasBombPacket(candies).isPresent()) return TRICK_OR_TREAT;
 
-        if (hasDifferentCandiesAmount(nbrCandies).isPresent()) return TRICK_OR_TREAT;
+        if (hasDifferentCandiesAmount(candies).isPresent()) return TRICK_OR_TREAT;
         return THANK_YOU_STRANGE_UNCLE;
 
     }
@@ -32,7 +29,8 @@ public class Halloween {
                 .findFirst();
     }
 
-    private static Optional<Long> hasDifferentCandiesAmount(List<Long> nbrCandies) {
+    private static Optional<Long> hasDifferentCandiesAmount(String[][] candies) {
+        List<Long> nbrCandies = candiesPerPacket(candies);
         return nbrCandies.stream()
                 .filter(nbrCandiesOPacket -> nbrCandiesOPacket < 2 || nbrCandiesOPacket != nbrCandies.get(0))
                 .findFirst();
