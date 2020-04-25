@@ -1,7 +1,6 @@
 package com.mlaku.dev.kata.halloweencandies;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,15 +18,18 @@ public class Halloween {
                 .findFirst();
         if (bombPacket.isPresent()) return TRICK_OR_TREAT;
 
-        List<String> candyCollection = Arrays.stream(candies)
-                .map(packet -> Arrays.stream(packet).filter(element -> element.equals("candy")).collect(Collectors.toList()))
-                .collect(Collectors.toList()).stream().flatMap(Collection::stream)
+        List<Long> nbrC = Arrays.stream(candies)
+                .map(packet -> Arrays.stream(packet).filter(element -> element.equals("candy")).count())
                 .collect(Collectors.toList());
-        // but here the rule was violated : Packets cannot be divided, each child gets a full packet
-        boolean eachChildHasCandy = candyCollection.size() % nbrChildren == 0;
-        if (!eachChildHasCandy) return TRICK_OR_TREAT;
-
-
+        Long candiesFirstPacket = nbrC.get(0);
+        Optional<Long> childHasDifferentAmount = nbrC.stream().filter(nbrCandiesOPacket -> hasDifferentAmountCandies(nbrCandiesOPacket < 2, nbrCandiesOPacket != candiesFirstPacket)).findFirst();
+        if (childHasDifferentAmount.isPresent()) return TRICK_OR_TREAT;
         return THANK_YOU_STRANGE_UNCLE;
+
     }
+
+    private static boolean hasDifferentAmountCandies(boolean b, boolean b2) {
+        return b || b2;
+    }
+
 }

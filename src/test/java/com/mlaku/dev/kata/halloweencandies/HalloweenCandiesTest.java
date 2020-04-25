@@ -80,4 +80,10 @@ public class HalloweenCandiesTest {
         assertThat(Halloween.trickOrTreat(3, candies)).isEqualTo("Trick or treat!");
     }
 
+    @Test
+    public void returnsTrickOrTreatWhenChildrenHaveDifferentAmountOfCandiesWithoutDividingPackets() {
+        String[][] candies = {{"candy", "candy"}, {"candy", "candy","candy", "candy","candy"}, {"candy", "candy", "apple"}};
+        assertThat(Halloween.trickOrTreat(3, candies)).isEqualTo("Trick or treat!");
+    }
+
 }
