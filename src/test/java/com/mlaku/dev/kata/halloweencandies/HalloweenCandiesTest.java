@@ -22,6 +22,8 @@ public class HalloweenCandiesTest {
      * 2 - Each child gets the same amount of candy.
      * 3 - No children get the "bomb" ;-)
      * 4 - Packets cannot be divided, each child gets a full packet
+     * <p>
+     * Parameteriazed tests
      */
 
     @Test
@@ -40,6 +42,30 @@ public class HalloweenCandiesTest {
     public void returnsTrickOrTreatWhenHavingNoPackets() {
         String result = Halloween.trickOrTreat(2, new String[][]{});
         assertThat(result).isEqualTo("Trick or treat!");
+    }
+
+    @Test
+    public void shouldHaveTheSameNbrPacketsAndNbrChildren() {
+        String[][] candies = {{"candy", "apple"}, {"apple", "candy"}, {"candy", "apple"}};
+        assertThat(Halloween.trickOrTreat(2, candies)).isEqualTo("Trick or treat!");
+    }
+
+    @Test
+    public void returnsThankYouWhenEachChildHaveAtLeast2Candies() {
+        String[][] candies = {{"candy", "candy"}, {"candy", "candy"}, {"candy", "candy"}};
+        assertThat(Halloween.trickOrTreat(3, candies)).isEqualTo(Halloween.THANK_YOU_STRANGE_UNCLE);
+    }
+
+    @Test
+    public void returnsTrickOrTreatWhenChildHaveOnlyOneCandy() {
+        String[][] candies = {{"candy", "candy"}, {"candy", "candy"}, {"candy", "apple"}};
+        assertThat(Halloween.trickOrTreat(3, candies)).isEqualTo("Trick or treat!");
+    }
+
+    @Test
+    public void returnsTrickOrTreatWhenChildrenHaveDifferentAmountOfCandies() {
+        String[][] candies = {{"candy", "candy"}, {"candy", "candy"}, {"candy", "candy", "candy", "apple"}};
+        assertThat(Halloween.trickOrTreat(3, candies)).isEqualTo("Trick or treat!");
     }
 
 }
