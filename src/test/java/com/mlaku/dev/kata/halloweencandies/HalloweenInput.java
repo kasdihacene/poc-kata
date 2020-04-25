@@ -13,8 +13,8 @@ public class HalloweenInput {
         this.expectedMessage = expectedMessage;
     }
 
-    public static HalloweenInput instance(int i, String[][] strings, String thankYouStrangeUncle) {
-        return new HalloweenInput(i,strings,thankYouStrangeUncle);
+    public static HalloweenInput instance(int nbrChildren, String[][] candies, String expectedMessage) {
+        return new HalloweenInput(nbrChildren,candies,expectedMessage);
     }
 
     public int getNbrChildren() {
