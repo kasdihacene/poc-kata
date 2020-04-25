@@ -42,7 +42,6 @@ public class Halloween {
 
     private static boolean filterGroupedPacketsByBusinessRules(Map<String, Long> group) {
         if (group.containsKey(BOMB)) return false;
-        if (group.containsKey(CANDY) && group.get(CANDY) < 2) return false;
-        return true;
+        return !group.containsKey(CANDY) || group.get(CANDY) >= 2;
     }
 }

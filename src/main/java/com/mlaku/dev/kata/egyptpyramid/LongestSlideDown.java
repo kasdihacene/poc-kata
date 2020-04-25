@@ -5,9 +5,9 @@ import java.util.Arrays;
 public class LongestSlideDown {
     public static int longestSlideDown(int[][] pyramid) {
         int result = 0;
-        for (int i = 0; i < pyramid.length; i++) {
-                System.out.println(Arrays.stream(pyramid[i]).max().getAsInt());
-                result+= Arrays.stream(pyramid[i]).max().getAsInt();
+        for (int[] ints : pyramid) {
+            System.out.println(Arrays.stream(ints).max().getAsInt());
+            result += Arrays.stream(ints).max().getAsInt();
         }
         return result;
     }

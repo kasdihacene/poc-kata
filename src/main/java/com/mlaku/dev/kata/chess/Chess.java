@@ -9,8 +9,8 @@ public class Chess {
 
     public static int knight(String pos1, String pos2) {
 
-        AbstractMap.SimpleEntry<Integer, Integer> pair1 = Chess.parsePositionKnight(pos1);
-        AbstractMap.SimpleEntry<Integer, Integer> pair2 = Chess.parsePositionKnight(pos2);
+        AbstractMap.SimpleEntry<Integer, Integer> pair1 = parsePositionKnight(pos1);
+        AbstractMap.SimpleEntry<Integer, Integer> pair2 = parsePositionKnight(pos2);
 
         Set<AbstractMap.SimpleEntry<Integer, Integer>> pairs1 = new HashSet<>();
         Set<AbstractMap.SimpleEntry<Integer, Integer>> pairs2 = new HashSet<>();
@@ -61,21 +61,21 @@ public class Chess {
     public static Set<AbstractMap.SimpleEntry<Integer, Integer>> getPossibleUpMoves(AbstractMap.SimpleEntry<Integer, Integer> oldPosition) {
         Set<AbstractMap.SimpleEntry<Integer, Integer>> setMoves = new HashSet<>();
 
-        if (oldPosition.getValue() + 1 < 9) {
-            if (oldPosition.getKey() + 2 < 9) {
-                setMoves.add(new AbstractMap.SimpleEntry<>(oldPosition.getKey() + 2, oldPosition.getValue() + 1));
+        if (moveStepUp(oldPosition) < 9) {
+            if (moveStepRight(oldPosition) + 1 < 9) {
+                setMoves.add(new AbstractMap.SimpleEntry<>(moveStepRight(oldPosition) + 1, moveStepUp(oldPosition)));
             }
-            if (oldPosition.getKey() - 2 > 0) {
-                setMoves.add(new AbstractMap.SimpleEntry<>(oldPosition.getKey() - 2, oldPosition.getValue() + 1));
+            if (moveStepLeft(oldPosition) - 1 > 0) {
+                setMoves.add(new AbstractMap.SimpleEntry<>(moveStepLeft(oldPosition) - 1, moveStepUp(oldPosition)));
             }
         }
 
-        if (oldPosition.getValue() + 2 < 9) {
-            if (oldPosition.getKey() + 1 < 9) {
-                setMoves.add(new AbstractMap.SimpleEntry<>(oldPosition.getKey() + 1, oldPosition.getValue() + 2));
+        if (moveStepUp(oldPosition) + 1 < 9) {
+            if (moveStepRight(oldPosition) < 9) {
+                setMoves.add(new AbstractMap.SimpleEntry<>(moveStepRight(oldPosition), moveStepUp(oldPosition) + 1));
             }
-            if (oldPosition.getKey() - 1 > 0) {
-                setMoves.add(new AbstractMap.SimpleEntry<>(oldPosition.getKey() - 1, oldPosition.getValue() + 2));
+            if (moveStepLeft(oldPosition) > 0) {
+                setMoves.add(new AbstractMap.SimpleEntry<>(moveStepLeft(oldPosition), moveStepUp(oldPosition) + 1));
             }
         }
 
@@ -85,27 +85,42 @@ public class Chess {
     public static Set<AbstractMap.SimpleEntry<Integer, Integer>> getPossibleDownMoves(AbstractMap.SimpleEntry<Integer, Integer> oldPosition) {
         Set<AbstractMap.SimpleEntry<Integer, Integer>> setMoves = new HashSet<>();
 
-        if (oldPosition.getValue() - 1 > 0) {
-            if (oldPosition.getKey() + 2 < 9) {
-                setMoves.add(new AbstractMap.SimpleEntry<>(oldPosition.getKey() + 2, oldPosition.getValue() - 1));
+        if (moveStepDown(oldPosition) > 0) {
+            if (moveStepRight(oldPosition) + 1 < 9) {
+                setMoves.add(new AbstractMap.SimpleEntry<>(moveStepRight(oldPosition) + 1, moveStepDown(oldPosition)));
             }
-            if (oldPosition.getKey() - 2 > 0) {
-                setMoves.add(new AbstractMap.SimpleEntry<>(oldPosition.getKey() - 2, oldPosition.getValue() - 1));
+            if (moveStepLeft(oldPosition) - 1 > 0) {
+                setMoves.add(new AbstractMap.SimpleEntry<>(moveStepLeft(oldPosition) - 1, moveStepDown(oldPosition)));
             }
         }
 
-        if (oldPosition.getValue() - 2 > 0) {
-            if (oldPosition.getKey() + 1 < 9) {
-                setMoves.add(new AbstractMap.SimpleEntry<>(oldPosition.getKey() + 1, oldPosition.getValue() - 2));
+        if (moveStepDown(oldPosition) - 1 > 0) {
+            if (moveStepRight(oldPosition) < 9) {
+                setMoves.add(new AbstractMap.SimpleEntry<>(moveStepRight(oldPosition), moveStepDown(oldPosition) - 1));
             }
-            if (oldPosition.getKey() - 1 > 0) {
-                setMoves.add(new AbstractMap.SimpleEntry<>(oldPosition.getKey() - 1, oldPosition.getValue() - 2));
+            if (moveStepLeft(oldPosition) > 0) {
+                setMoves.add(new AbstractMap.SimpleEntry<>(moveStepLeft(oldPosition), moveStepDown(oldPosition) - 1));
             }
         }
 
         return setMoves;
     }
 
+    private static int moveStepRight(AbstractMap.SimpleEntry<Integer, Integer> oldPosition) {
+        return oldPosition.getKey() + 1;
+    }
+
+    private static int moveStepUp(AbstractMap.SimpleEntry<Integer, Integer> oldPosition) {
+        return oldPosition.getValue() + 1;
+    }
+
+    private static int moveStepDown(AbstractMap.SimpleEntry<Integer, Integer> oldPosition) {
+        return oldPosition.getValue() - 1;
+    }
+
+    private static int moveStepLeft(AbstractMap.SimpleEntry<Integer, Integer> oldPosition) {
+        return oldPosition.getKey() - 1;
+    }
 
     private static int getIndexFromLetter(String letter) {
         switch (letter.toLowerCase()) {

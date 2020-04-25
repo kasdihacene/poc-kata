@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static java.util.Comparator.*;
+
 public class SumOfK {
     public static Integer chooseBestSum(int t, int k, List<Integer> ls) {
 
@@ -17,14 +19,11 @@ public class SumOfK {
     }
 
     private static Integer getRoundInteger(int max, List<Integer> sumList) {
-        Collections.sort(sumList, Comparator.reverseOrder());
+        sumList.sort(reverseOrder());
         List<Integer> summedLists = sumList.stream().filter(e -> e <= max).collect(Collectors.toList());
 
         Optional<Integer> maxFound = summedLists.stream().max(Integer::compareTo);
-        if (maxFound.isPresent()){
-            return maxFound.get();
-        }
-        return null;
+        return maxFound.orElse(null);
     }
 
     public static int sumIntegerList(List<Integer> listIntegers) {

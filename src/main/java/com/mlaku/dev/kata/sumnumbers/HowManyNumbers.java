@@ -33,7 +33,7 @@ public class HowManyNumbers {
         List<String> listDigits = Arrays.asList((number + "").split(""));
         List<Integer> foundList = IntStream.range(0, listDigits.size()).boxed().filter(i -> {
             if (i + 1 < listDigits.size()) {
-                return (Integer.valueOf(listDigits.get(i)) <= Integer.valueOf(listDigits.get(i + 1)));
+                return (Integer.parseInt(listDigits.get(i)) <= Integer.parseInt(listDigits.get(i + 1)));
             }
             return false;
         }).collect(Collectors.toList());

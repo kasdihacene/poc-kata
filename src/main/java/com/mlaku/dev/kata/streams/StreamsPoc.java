@@ -12,10 +12,9 @@ public class StreamsPoc {
         return inputs.stream().collect(Collectors.groupingBy(Object::toString,Collectors.counting()));
     }
 
-    public static AbstractMap.SimpleEntry<Object, Long> getMaxOccurrences(List<Integer> inputs) {
+    public static AbstractMap.SimpleEntry getMaxOccurrences(List<Integer> inputs) {
         Optional<Map.Entry<Integer, Long>> e = inputs.stream().collect(Collectors.groupingBy(Integer::intValue,Collectors.counting()))
-                .entrySet().stream().max(Comparator.comparing(Map.Entry::getValue));
-        if (e.isPresent()) return new AbstractMap.SimpleEntry(e.get().getKey(),e.get().getValue());
-        return null;
+                .entrySet().stream().max(Map.Entry.comparingByValue());
+        return e.map(integerLongEntry -> new AbstractMap.SimpleEntry(integerLongEntry.getKey(), integerLongEntry.getValue())).orElse(null);
     }
 }

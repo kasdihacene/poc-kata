@@ -12,7 +12,7 @@ public class DescendingOrder {
 
         List<Integer> listOccurrences = buildSortedNumbers(numAsString);
 
-        return Integer.valueOf(concatListElements(listOccurrences));
+        return Integer.parseInt(concatListElements(listOccurrences));
     }
 
     private static List<Integer> buildSortedNumbers(String numAsString) {
@@ -20,14 +20,14 @@ public class DescendingOrder {
         for (int i = 0; i < numAsString.length(); i++) {
             listOccurrences.add(Character.getNumericValue(numAsString.charAt(i)));
         }
-        Collections.sort(listOccurrences, Collections.reverseOrder());
+        listOccurrences.sort(Collections.reverseOrder());
         return listOccurrences;
     }
 
     private static String concatListElements(List<Integer> objects) {
-        String concats = "";
+        StringBuilder concats = new StringBuilder();
         for (Object o : objects)
-            concats += o;
-        return concats;
+            concats.append(o);
+        return concats.toString();
     }
 }
