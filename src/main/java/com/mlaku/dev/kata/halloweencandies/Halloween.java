@@ -13,23 +13,35 @@ public class Halloween {
     public static final String CANDY = "candy";
 
     public static String trickOrTreat(int nbrChildren, String[][] candies) {
-        if (nbrChildren < 2 || candies.length != nbrChildren) return TRICK_OR_TREAT;
+        boolean rule1 = nbrChildren < 2 || candies.length != nbrChildren;
+        if (rule1) return TRICK_OR_TREAT;
 
-        Optional<String[]> bombPacket = Arrays.stream(candies)
-                .filter(packet -> Arrays.stream(packet).anyMatch(element -> element.equals(BOMB)))
-                .findFirst();
+        Optional<String[]> bombPacket = hasBombPacket(candies);
         if (bombPacket.isPresent()) return TRICK_OR_TREAT;
 
-        List<Long> nbrCandies = Arrays.stream(candies)
-                .map(packet -> Arrays.stream(packet).filter(element -> element.equals(CANDY)).count())
-                .collect(Collectors.toList());
+        List<Long> nbrCandies = candiesPerPacket(candies);
 
-        Optional<Long> childHasDifferentAmount = nbrCandies.stream()
-                .filter(nbrCandiesOPacket -> nbrCandiesOPacket < 2 || nbrCandiesOPacket != nbrCandies.get(0))
-                .findFirst();
-        if (childHasDifferentAmount.isPresent()) return TRICK_OR_TREAT;
+        if (hasDifferentCandiesAmount(nbrCandies).isPresent()) return TRICK_OR_TREAT;
         return THANK_YOU_STRANGE_UNCLE;
 
+    }
+
+    private static Optional<String[]> hasBombPacket(String[][] candies) {
+        return Arrays.stream(candies)
+                .filter(packet -> Arrays.stream(packet).anyMatch(element -> element.equals(BOMB)))
+                .findFirst();
+    }
+
+    private static Optional<Long> hasDifferentCandiesAmount(List<Long> nbrCandies) {
+        return nbrCandies.stream()
+                .filter(nbrCandiesOPacket -> nbrCandiesOPacket < 2 || nbrCandiesOPacket != nbrCandies.get(0))
+                .findFirst();
+    }
+
+    private static List<Long> candiesPerPacket(String[][] candies) {
+        return Arrays.stream(candies)
+                .map(packet -> Arrays.stream(packet).filter(element -> element.equals(CANDY)).count())
+                .collect(Collectors.toList());
     }
 
 }
