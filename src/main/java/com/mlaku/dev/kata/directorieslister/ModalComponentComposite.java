@@ -7,10 +7,8 @@ import java.util.List;
 
 public class ModalComponentComposite extends ModalComponent {
 
-    private File folder;
-
     public ModalComponentComposite(File folder) {
-        this.folder = folder;
+        super(folder);
     }
 
     @Override

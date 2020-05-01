@@ -5,10 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FileLeaf extends ModalComponent {
-    private File folder;
 
     public FileLeaf(File folder) {
-        this.folder = folder;
+        super(folder);
     }
 
     @Override

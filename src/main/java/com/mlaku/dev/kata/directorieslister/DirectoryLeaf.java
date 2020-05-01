@@ -1,24 +1,20 @@
 package com.mlaku.dev.kata.directorieslister;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class DirectoryLeaf extends ModalComponent {
-    private File file;
-    List<ModalComponent> directories;
 
-    public DirectoryLeaf(File file) {
-        this.file = file;
-        directories = new ArrayList<>();
+    public DirectoryLeaf(File folder) {
+        super(folder);
     }
 
     @Override
     public String rootPath() {
-        return file.getPath();
+        return folder.getPath();
     }
 
     @Override
@@ -31,11 +27,11 @@ public class DirectoryLeaf extends ModalComponent {
 
     private List<ModalComponent> buildComponents() {
         return getFiles().stream()
-                .map(file1 -> file1.isFile() ? new FileLeaf(file1) : new DirectoryLeaf(file1))
+                .map(fileLeaf -> fileLeaf.isFile() ? new FileLeaf(fileLeaf) : new DirectoryLeaf(fileLeaf))
                 .collect(Collectors.toList());
     }
 
     private List<File> getFiles() {
-        return Arrays.stream(file.listFiles()).collect(Collectors.toList());
+        return Arrays.stream(folder.listFiles()).collect(Collectors.toList());
     }
 }
