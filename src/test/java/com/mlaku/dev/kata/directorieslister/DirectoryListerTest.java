@@ -16,11 +16,6 @@ public class DirectoryListerTest {
      * <p>
      * TDD Clean code DP composite, recursion, SOLID, FIRST
      */
-    @Test
-    public void init() {
-        assertThat(false).isFalse();
-    }
-
 
     @Test
     public void returnsListedFilesOrDirectoriesFromEnteredPath() {
@@ -53,5 +48,31 @@ public class DirectoryListerTest {
         System.out.println(filenames);
 
         assertThat(filenames.size()).isEqualTo(expectedLength);
+    }
+
+    @Test
+    public void returnsFourFilesEntitiesOfDirectoryAndFilesOfSubDirectory() {
+        File folder = new File("directoryMock2");
+
+        ModalComponentComposite modalComposite = new ModalComponentComposite(folder);
+        List<ModalComponent> files = modalComposite.files();
+
+        int expectedLength = 4;
+        System.out.println(modalComposite);
+
+        assertThat(files.size()).isEqualTo(expectedLength);
+    }
+
+    @Test
+    public void returnsTwelveFilesEntitiesOfDirectoryAndFilesOfSubDirectory() {
+        File folder = new File("directory");
+
+        ModalComponentComposite modalComposite = new ModalComponentComposite(folder);
+        List<ModalComponent> files = modalComposite.files();
+
+        int expectedLength = 12;
+        System.out.println(modalComposite);
+
+        assertThat(files.size()).isEqualTo(expectedLength);
     }
 }
