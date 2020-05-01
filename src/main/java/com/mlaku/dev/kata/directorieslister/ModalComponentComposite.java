@@ -24,4 +24,9 @@ public class ModalComponentComposite extends ModalComponent {
 
     }
 
+    @Override
+    void printChildren() {
+        new DirectoryLeaf(this.folder).printChildren();
+    }
+
 }

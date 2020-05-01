@@ -13,7 +13,7 @@ public class DirectoryListerTest {
      * This KATA allows you to practice TDD, SOLID principals,
      * List all files of the directories in the root path and the files of the sub directories found
      * inside the directories.
-     * <p>
+     *
      * TDD Clean code DP composite, recursion, SOLID, FIRST
      */
 
@@ -23,7 +23,6 @@ public class DirectoryListerTest {
 
         List<String> filenames = DirectoryHelper.fetchAllFiles(folder);
         int expectedLength = 2;
-        System.out.println(filenames);
 
         assertThat(filenames.size()).isEqualTo(expectedLength);
     }
@@ -34,7 +33,6 @@ public class DirectoryListerTest {
 
         List<String> filenames = DirectoryHelper.fetchAllFiles(folder);
         int expectedLength = 4;
-        System.out.println(filenames);
 
         assertThat(filenames.size()).isEqualTo(expectedLength);
     }
@@ -45,7 +43,6 @@ public class DirectoryListerTest {
 
         List<String> filenames = DirectoryHelper.fetchAllFiles(folder);
         int expectedLength = 12;
-        System.out.println(filenames);
 
         assertThat(filenames.size()).isEqualTo(expectedLength);
     }
@@ -58,7 +55,6 @@ public class DirectoryListerTest {
         List<ModalComponent> files = modalComposite.files();
 
         int expectedLength = 4;
-        System.out.println(modalComposite);
 
         assertThat(files.size()).isEqualTo(expectedLength);
     }
@@ -71,8 +67,16 @@ public class DirectoryListerTest {
         List<ModalComponent> files = modalComposite.files();
 
         int expectedLength = 12;
-        System.out.println(modalComposite);
 
         assertThat(files.size()).isEqualTo(expectedLength);
+    }
+
+    @Test
+    public void returns4FilesEntitiesOfDirectoryAndFilesOfSubDirectory() {
+        File folder = new File("directoryMock3");
+
+        ModalComponentComposite modalComposite = new ModalComponentComposite(folder);
+        modalComposite.printChildren();
+
     }
 }

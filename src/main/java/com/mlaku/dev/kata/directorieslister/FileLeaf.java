@@ -20,4 +20,9 @@ public class FileLeaf extends ModalComponent {
         return Arrays.asList(this);
     }
 
+    @Override
+    void printChildren() {
+        System.out.println("FILE ==> "+rootPath());
+    }
+
 }

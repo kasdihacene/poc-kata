@@ -25,10 +25,17 @@ public class DirectoryLeaf extends ModalComponent {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    void printChildren() {
+        System.out.println("FOLDER ==> " + rootPath());
+        buildComponents().stream().forEach(ModalComponent::printChildren);
+    }
+
     private List<ModalComponent> buildComponents() {
-        return getFiles().stream()
+        List<ModalComponent> modalComponents = getFiles().stream()
                 .map(fileLeaf -> fileLeaf.isFile() ? new FileLeaf(fileLeaf) : new DirectoryLeaf(fileLeaf))
                 .collect(Collectors.toList());
+        return modalComponents;
     }
 
     private List<File> getFiles() {
