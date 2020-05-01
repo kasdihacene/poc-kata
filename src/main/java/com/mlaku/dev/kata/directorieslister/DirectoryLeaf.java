@@ -35,13 +35,8 @@ public class DirectoryLeaf implements ModalComponent {
 
     private List<ModalComponent> buildComponents() {
         List<File> files = Arrays.stream(file.listFiles()).collect(Collectors.toList());
-        for (int i = 0; i < files.size(); i++) {
-            boolean isFile = files.get(i).isFile();
-            if (isFile)
-                directories.add(new FileLeaf(files.get(i)));
-            else
-                directories.add(new DirectoryLeaf(files.get(i)));
-        }
-        return directories;
+        return files.stream()
+                .map(file1 -> file1.isFile() ? new FileLeaf(file1) : new DirectoryLeaf(file1))
+                .collect(Collectors.toList());
     }
 }
