@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.File;
 import java.util.List;
 
-public class ModalComponentComposite implements ModalComponent {
+public class ModalComponentComposite extends ModalComponent {
 
     private File folder;
 

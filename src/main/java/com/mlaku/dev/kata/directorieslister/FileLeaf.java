@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileLeaf implements ModalComponent {
+public class FileLeaf extends ModalComponent {
     private File folder;
 
     public FileLeaf(File folder) {
@@ -21,10 +21,4 @@ public class FileLeaf implements ModalComponent {
         return Arrays.asList(this);
     }
 
-    @Override
-    public String toString() {
-        return "FileLeaf{" +
-                "folder=" + folder.getPath() +
-                '}';
-    }
 }

@@ -7,17 +7,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DirectoryLeaf implements ModalComponent {
+public class DirectoryLeaf extends ModalComponent {
     private File file;
     List<ModalComponent> directories;
 
     public DirectoryLeaf(File file) {
         this.file = file;
         directories = new ArrayList<>();
-    }
-
-    public File getFile() {
-        return file;
     }
 
     @Override
@@ -34,9 +30,12 @@ public class DirectoryLeaf implements ModalComponent {
     }
 
     private List<ModalComponent> buildComponents() {
-        List<File> files = Arrays.stream(file.listFiles()).collect(Collectors.toList());
-        return files.stream()
+        return getFiles().stream()
                 .map(file1 -> file1.isFile() ? new FileLeaf(file1) : new DirectoryLeaf(file1))
                 .collect(Collectors.toList());
+    }
+
+    private List<File> getFiles() {
+        return Arrays.stream(file.listFiles()).collect(Collectors.toList());
     }
 }
