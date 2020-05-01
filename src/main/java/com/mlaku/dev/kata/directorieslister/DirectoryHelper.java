@@ -2,26 +2,29 @@ package com.mlaku.dev.kata.directorieslister;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DirectoryHelper {
     public static List<String> fetchAllFiles(File folder) {
-        List<String> listStrings = new ArrayList<>();
+        return recursiveSearch(folder);
+    }
 
-        File[] files = folder.listFiles();
-        for (int i = 0; i < files.length; i++) {
-            File file = files[i];
-            if (file.isFile()){
-                listStrings.add(file.getPath());
-            }
-            else {
-                File[] filesSubDir = file.listFiles();
-                for (int j = 0; j < filesSubDir.length; j++) {
-                    File fileOfSubDir = filesSubDir[j];
-                    listStrings.add(fileOfSubDir.getName());
-                }
+    private static List<String> recursiveSearch(File folder) {
+        List<String> returnPaths = new ArrayList<>();
+        if (folder.isFile()) {
+            returnPaths.add(folder.getPath());
+            return Arrays.asList(folder.getPath());
+        } else {
+            File[] files = folder.listFiles();
+            for (int i = 0; i < files.length; i++) {
+
+                returnPaths.addAll(recursiveSearch(files[i]));
             }
         }
-        return listStrings;
+
+        return returnPaths;
     }
+
+
 }

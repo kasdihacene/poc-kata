@@ -28,16 +28,29 @@ public class DirectoryListerTest {
 
         List<String> filenames = DirectoryHelper.fetchAllFiles(folder);
         int expectedLength = 2;
+        System.out.println(filenames);
 
         assertThat(filenames.size()).isEqualTo(expectedLength);
     }
 
     @Test
-    public void returnsFilesOfDirectoryAndFilesOfSubDirectory(){
+    public void returnsFilesOfDirectoryAndFilesOfSubDirectory() {
         File folder = new File("directoryMock2");
 
         List<String> filenames = DirectoryHelper.fetchAllFiles(folder);
         int expectedLength = 4;
+        System.out.println(filenames);
+
+        assertThat(filenames.size()).isEqualTo(expectedLength);
+    }
+
+    @Test
+    public void returnsFilesOfDirectoryAndFilesOfNSubDirectory() {
+        File folder = new File("directory");
+
+        List<String> filenames = DirectoryHelper.fetchAllFiles(folder);
+        int expectedLength = 12;
+        System.out.println(filenames);
 
         assertThat(filenames.size()).isEqualTo(expectedLength);
     }
