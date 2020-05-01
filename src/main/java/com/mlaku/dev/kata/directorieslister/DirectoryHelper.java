@@ -10,7 +10,14 @@ public class DirectoryHelper {
 
         for (int i = 0; i < folder.listFiles().length; i++) {
             File file = folder.listFiles()[i];
-            listStrings.add(file.getPath());
+            if (file.isFile())
+                listStrings.add(file.getPath());
+            else {
+                for (int j = 0; j < file.listFiles().length; j++) {
+                    File fileOfSubDir = file.listFiles()[j];
+                    listStrings.add(fileOfSubDir.getName());
+                }
+            }
         }
         return listStrings;
     }

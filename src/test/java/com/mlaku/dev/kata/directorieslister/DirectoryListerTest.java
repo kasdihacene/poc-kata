@@ -24,10 +24,20 @@ public class DirectoryListerTest {
 
     @Test
     public void returnsListedFilesOrDirectoriesFromEnteredPath() {
-        File folder = new File("directoryMock");
+        File folder = new File("directoryMock1");
 
         List<String> filenames = DirectoryHelper.fetchAllFiles(folder);
         int expectedLength = 2;
+
+        assertThat(filenames.size()).isEqualTo(expectedLength);
+    }
+
+    @Test
+    public void returnsFilesOfDirectoryAndFilesOfSubDirectory(){
+        File folder = new File("directoryMock2");
+
+        List<String> filenames = DirectoryHelper.fetchAllFiles(folder);
+        int expectedLength = 4;
 
         assertThat(filenames.size()).isEqualTo(expectedLength);
     }
