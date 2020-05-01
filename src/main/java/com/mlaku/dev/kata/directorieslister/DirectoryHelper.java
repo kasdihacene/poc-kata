@@ -8,13 +8,16 @@ public class DirectoryHelper {
     public static List<String> fetchAllFiles(File folder) {
         List<String> listStrings = new ArrayList<>();
 
-        for (int i = 0; i < folder.listFiles().length; i++) {
-            File file = folder.listFiles()[i];
-            if (file.isFile())
+        File[] files = folder.listFiles();
+        for (int i = 0; i < files.length; i++) {
+            File file = files[i];
+            if (file.isFile()){
                 listStrings.add(file.getPath());
+            }
             else {
-                for (int j = 0; j < file.listFiles().length; j++) {
-                    File fileOfSubDir = file.listFiles()[j];
+                File[] filesSubDir = file.listFiles();
+                for (int j = 0; j < filesSubDir.length; j++) {
+                    File fileOfSubDir = filesSubDir[j];
                     listStrings.add(fileOfSubDir.getName());
                 }
             }
