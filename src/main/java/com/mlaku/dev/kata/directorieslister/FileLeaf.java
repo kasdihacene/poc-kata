@@ -21,6 +21,12 @@ public class FileLeaf extends ModalComponent {
     }
 
     @Override
+    List<ModalComponent> children() {
+        System.out.println("FILES ==> "+rootPath());
+        return Arrays.asList(this);
+    }
+
+    @Override
     void printChildren() {
         System.out.println("FILE ==> "+rootPath());
     }

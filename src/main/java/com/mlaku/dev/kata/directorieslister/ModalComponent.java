@@ -13,6 +13,7 @@ public abstract class ModalComponent {
 
     abstract String rootPath();
     abstract List<ModalComponent> files();
+    abstract List<ModalComponent> children();
     abstract void printChildren();
 
 }

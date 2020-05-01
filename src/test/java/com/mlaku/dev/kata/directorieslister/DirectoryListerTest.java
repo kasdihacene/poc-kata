@@ -60,6 +60,18 @@ public class DirectoryListerTest {
     }
 
     @Test
+    public void returnsAllChildrenModalComposite() {
+        File folder = new File("directoryMock2");
+
+        ModalComponentComposite modalComposite = new ModalComponentComposite(folder);
+        List<ModalComponent> files = modalComposite.children();
+
+        int expectedLength = 6;
+
+        assertThat(files.size()).isEqualTo(expectedLength);
+    }
+
+    @Test
     public void returnsTwelveFilesEntitiesOfDirectoryAndFilesOfSubDirectory() {
         File folder = new File("directory");
 

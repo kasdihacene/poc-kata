@@ -16,11 +16,9 @@ public class DirectoryHelper {
             returnPaths.add(folder.getPath());
             return Arrays.asList(folder.getPath());
         } else {
-            File[] files = folder.listFiles();
-            for (int i = 0; i < files.length; i++) {
-
-                returnPaths.addAll(recursiveSearch(files[i]));
-            }
+            Arrays.stream(folder.listFiles())
+                    .map(DirectoryHelper::recursiveSearch)
+                    .forEach(returnPaths::addAll);
         }
 
         return returnPaths;

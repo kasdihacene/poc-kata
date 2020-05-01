@@ -25,6 +25,11 @@ public class ModalComponentComposite extends ModalComponent {
     }
 
     @Override
+    List<ModalComponent> children() {
+        return new DirectoryLeaf(this.folder).children();
+    }
+
+    @Override
     void printChildren() {
         new DirectoryLeaf(this.folder).printChildren();
     }

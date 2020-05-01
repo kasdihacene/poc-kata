@@ -1,6 +1,7 @@
 package com.mlaku.dev.kata.directorieslister;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -8,8 +9,11 @@ import java.util.stream.Collectors;
 
 public class DirectoryLeaf extends ModalComponent {
 
+    private final List<ModalComponent> children;
+
     public DirectoryLeaf(File folder) {
         super(folder);
+        children = new ArrayList<>();
     }
 
     @Override
@@ -19,10 +23,23 @@ public class DirectoryLeaf extends ModalComponent {
 
     @Override
     public List<ModalComponent> files() {
-        return buildComponents().stream()
+        List<ModalComponent> collect = buildComponents().stream()
                 .map(ModalComponent::files)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
+        return collect;
+    }
+
+    @Override
+    List<ModalComponent> children() {
+        System.out.println("DIRECTORY ==> "+rootPath());
+        children.add(this);
+        List<ModalComponent> collect = buildComponents().stream()
+                .map(ModalComponent::children)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        children.addAll(collect);
+        return children;
     }
 
     @Override
