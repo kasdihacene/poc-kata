@@ -18,4 +18,15 @@ public class BasketTest {
         int expectedResult = ShopCalculator.total(new Article("SHOE", 20,1));
         assertThat(actualResult).isEqualTo(expectedResult);
     }
+
+    @Test
+    public void shouldReturnThePriceOWhenHavingTheSameArticleTwoTimes(){
+
+        int actualResult = 40;
+        int expectedResult = ShopCalculator.total(new Article("SHOE", 20,2));
+        assertThat(actualResult).isEqualTo(expectedResult);
+
+    }
+
+
 }

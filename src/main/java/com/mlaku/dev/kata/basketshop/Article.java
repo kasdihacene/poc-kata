@@ -10,4 +10,12 @@ public class Article {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }
