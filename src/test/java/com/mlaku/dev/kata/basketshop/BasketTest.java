@@ -7,23 +7,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BasketTest {
 
     @Test
-    public void init() {
-        assertThat(false).isFalse();
-    }
-
-    @Test
     public void shouldReturnThePriceWhenHavingOneArticle() {
 
         int actualResult = 20;
-        int expectedResult = ShopCalculator.total(new Article("SHOE", 20,1));
+        Price price = new Price(20);
+        Quantity quantity = new Quantity(1);
+        int expectedResult = ShopCalculator.total(new Article("SHOE", price, quantity));
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 
     @Test
-    public void shouldReturnThePriceOWhenHavingTheSameArticleTwoTimes(){
+    public void shouldReturnThePriceOWhenHavingTheSameArticleTwoTimes() {
 
         int actualResult = 40;
-        int expectedResult = ShopCalculator.total(new Article("SHOE", 20,2));
+        Price price = new Price(20);
+        Quantity quantity = new Quantity(2);
+        int expectedResult = ShopCalculator.total(new Article("SHOE", price, quantity));
         assertThat(actualResult).isEqualTo(expectedResult);
 
     }
