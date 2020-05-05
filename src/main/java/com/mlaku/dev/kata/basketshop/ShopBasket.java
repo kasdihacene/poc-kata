@@ -4,9 +4,15 @@ import java.util.List;
 
 public class ShopBasket {
 
-    public static int totalBasket(List<Article> articleCollection) {
+    private List<Article> articleCollection;
 
-        return articleCollection.stream()
+    public ShopBasket(List<Article> articleCollection) {
+        this.articleCollection = articleCollection;
+    }
+
+    public int totalBasket() {
+
+        return this.articleCollection.stream()
                 .map(Article::calculateTotal)
                 .reduce(0, Integer::sum);
     }
