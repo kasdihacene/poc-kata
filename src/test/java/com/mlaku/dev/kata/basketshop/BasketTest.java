@@ -15,7 +15,8 @@ public class BasketTest {
         int actualResult = 20;
         Price price = new Price(20);
         Quantity quantity = new Quantity(1);
-        int expectedResult = ShopBasket.total(Article.instance().withItemCode("SHOE").withPrice(price).withQuantity(quantity).build());
+        int result = ShopBasket.totalBasket(Arrays.asList(Article.instance().withItemCode("SHOE").withPrice(price).withQuantity(quantity).build()));
+        int expectedResult = result;
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 
@@ -25,7 +26,8 @@ public class BasketTest {
         int actualResult = 40;
         Price price = new Price(20);
         Quantity quantity = new Quantity(2);
-        int expectedResult = ShopBasket.total(Article.instance().withItemCode("SHOE").withPrice(price).withQuantity(quantity).build());
+        int result = ShopBasket.totalBasket(Arrays.asList(Article.instance().withItemCode("SHOE").withPrice(price).withQuantity(quantity).build()));
+        int expectedResult = result;
         assertThat(actualResult).isEqualTo(expectedResult);
 
     }
