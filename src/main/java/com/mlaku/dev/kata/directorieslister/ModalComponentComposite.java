@@ -19,7 +19,7 @@ public class ModalComponentComposite extends ModalComponent {
     @Autowired
     public List<ModalComponent> files() {
 
-        ModalComponent directoryLeaf = new DirectoryLeaf(this.folder);
+        ModalComponent directoryLeaf = new DirectoryLeaf(this.folder);// SOLID IS
         return directoryLeaf.files();
 
     }
