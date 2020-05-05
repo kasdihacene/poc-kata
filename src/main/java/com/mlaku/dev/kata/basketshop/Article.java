@@ -19,6 +19,14 @@ public class Article {
         return new Builder();
     }
 
+    public boolean isItemCode(String itemCode) {
+        return itemCode.equals(this.itemCode);
+    }
+
+    public Price price() {
+        return this.price;
+    }
+
     protected static final class Builder {
         private String itemCode;
         private Price price;

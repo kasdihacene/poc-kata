@@ -36,7 +36,7 @@ public class BasketTest {
     }
 
     @Test
-    public void ShouldReturn120AsTotalPriceOfArticlesInBasket() {
+    public void shouldReturn120AsTotalPriceOfArticlesInBasket() {
         // ARRANGE
         int actualResult = 120;
         Article article1 = Article.instance().withItemCode("SHOE").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
@@ -50,7 +50,7 @@ public class BasketTest {
     }
 
     @Test
-    public void ShouldReturn80AsTotalPriceOfArticlesInBasket() {
+    public void shouldReturn80AsTotalPriceOfArticlesInBasket() {
         // ARRANGE
         int actualResult = 80;
         Article article2 = Article.instance().withItemCode("SANDAL").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
@@ -63,7 +63,7 @@ public class BasketTest {
     }
 
     @Test
-    public void ShouldReturn100AsTotalPriceOfShoeAndOtherArticleInBasket() {
+    public void shouldReturn100AsTotalPriceOfShoeAndOtherArticleInBasket() {
         // ARRANGE
         int actualResult = 100;
         Article article2 = Article.instance().withItemCode("SANDAL").withPrice(new Price(30)).withQuantity(new Quantity(2)).build();
@@ -72,6 +72,32 @@ public class BasketTest {
         // ACT
         int expectedResult = new ShopBasket(articleCollection).totalBasket();
         // ASSERT
+        assertThat(actualResult).isEqualTo(expectedResult);
+    }
+
+    @Test
+    public void returnsNewTotalAfterAddingNewArticlesAdidasShoesToTheCollection() {
+        int actualResult = 250;
+        ShopBasket shopBasket = new ShopBasket();
+        Article item1 = Article.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
+        Article item2 = Article.instance().withItemCode("Adidas").withPrice(new Price(150)).withQuantity(new Quantity(1)).build();
+        shopBasket.addItem(item1);
+        shopBasket.addItem(item2);
+        int expectedResult = shopBasket.totalBasket();
+        assertThat(actualResult).isEqualTo(expectedResult);
+    }
+
+    @Test
+    public void returnsPriceOfAdidasShoesWhenItemCodeIsAdidas() {
+        Price actualResult=new Price(100);
+        Article article2 = Article.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
+        Article article3 = Article.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        List<Article> articleCollection = Arrays.asList(article2, article3);
+        ShopBasket shopBasket = new ShopBasket(articleCollection);
+
+        // ACT
+
+        Price expectedResult = shopBasket.fetch("Adidas") ;
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 
