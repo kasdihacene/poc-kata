@@ -4,17 +4,32 @@ import com.mlaku.dev.kata.basketshop.visitor.Visitor;
 
 public abstract class Article {
 
+    protected String itemCode;
+    protected Price price;
+    protected Quantity quantity;
+
     public abstract int accept(Visitor visitor);
 
-    public abstract int calculateTotal();
+    public int calculateTotal(){
+        return price.calculateTotalPrice(this.quantity);
+    }
 
-    public abstract boolean isItemCode(String itemCode);
 
-    public abstract Price price();
+    public boolean isItemCode(String itemCode) {
+        return itemCode.equals(this.itemCode);
+    }
 
-    public abstract boolean isQuantityEqualsToOne();
+    public Price price() {
+        return this.price;
+    }
 
-    public abstract void decrementQuantity();
+    public boolean isQuantityEqualsToOne() {
+        return this.quantity.equals(new Quantity(1));
+    }
+
+    public void decrementQuantity() {
+        this.quantity.decrement();
+    }
 
 
 }

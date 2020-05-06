@@ -4,34 +4,10 @@ import com.mlaku.dev.kata.basketshop.visitor.Visitor;
 
 public class Dress extends Article {
 
-    private final String itemCode;
-    private final Price price;
-    private final Quantity quantity;
-
     public Dress(String itemCode, Price price, Quantity quantity) {
-        this.itemCode = itemCode;
-        this.price = price;
-        this.quantity = quantity;
-    }
-
-    public int calculateTotal() {
-        return price.calculateTotalPrice(this.quantity);
-    }
-
-    public boolean isItemCode(String itemCode) {
-        return itemCode.equals(this.itemCode);
-    }
-
-    public Price price() {
-        return this.price;
-    }
-
-    public boolean isQuantityEqualsToOne() {
-        return this.quantity.equals(new Quantity(1));
-    }
-
-    public void decrementQuantity() {
-        this.quantity.decrement();
+        super.itemCode = itemCode;
+        super.price = price;
+        super.quantity = quantity;
     }
 
     @Override
@@ -66,7 +42,7 @@ public class Dress extends Article {
             return this;
         }
 
-        public Dress build() {
+        public Article build() {
             return new Dress(itemCode, price, quantity);
         }
     }

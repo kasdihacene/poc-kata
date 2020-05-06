@@ -73,4 +73,5 @@ public class ArticleTest {
         // ASSERT
         assertThat(actualResult).isEqualTo(expectedResult);
     }
+
 }
