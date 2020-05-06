@@ -27,6 +27,14 @@ public class Article {
         return this.price;
     }
 
+    public boolean isQuantityEqualsToOne() {
+        return this.quantity.equals(new Quantity(1));
+    }
+
+    public void decrementQuantity() {
+        this.quantity.decrement();
+    }
+
     protected static final class Builder {
         private String itemCode;
         private Price price;

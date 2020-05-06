@@ -89,17 +89,50 @@ public class BasketTest {
 
     @Test
     public void returnsPriceOfAdidasShoesWhenItemCodeIsAdidas() {
-        Price actualResult=new Price(100);
+        Price actualResult = new Price(100);
         Article article2 = Article.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
         Article article3 = Article.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
         List<Article> articleCollection = Arrays.asList(article2, article3);
         ShopBasket shopBasket = new ShopBasket(articleCollection);
-
         // ACT
-
-        Price expectedResult = shopBasket.fetch("Adidas") ;
+        Price expectedResult = shopBasket.fetch("Adidas");
         assertThat(actualResult).isEqualTo(expectedResult);
     }
+
+    @Test
+    public void shouldReturnTrueWhenRemovingAPairOfAdidasShoes() {
+
+        Article article2 = Article.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
+        Article article3 = Article.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        List<Article> articleCollection = Arrays.asList(article2, article3);
+        ShopBasket shopBasket = new ShopBasket(articleCollection);
+        int actualResult = 140;
+        // ACT
+
+        boolean expectedResult = shopBasket.remove("Adidas");
+        assertThat(expectedResult).isTrue();
+
+        int expectedResultTotal = shopBasket.totalBasket();
+        assertThat(actualResult).isEqualTo(expectedResultTotal);
+    }
+
+    @Test
+    public void shouldReturnFalseWhenRemovingABrandOfShoesThatDoesntExist() {
+
+        Article article2 = Article.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
+        Article article3 = Article.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        List<Article> articleCollection = Arrays.asList(article2, article3);
+        ShopBasket shopBasket = new ShopBasket(articleCollection);
+        int actualResult = 240;
+        // ACT
+
+        boolean expectedResult = shopBasket.remove("Nike");
+        assertThat(expectedResult).isFalse();
+
+        int expectedResultTotal = shopBasket.totalBasket();
+        assertThat(actualResult).isEqualTo(expectedResultTotal);
+    }
+
 
 
 }

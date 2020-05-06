@@ -34,4 +34,19 @@ public class ShopBasket {
         }
         return null;
     }
+
+
+    public boolean remove(String itemCode) {
+        for (Article article : articleCollection) {
+            if ((article.isItemCode(itemCode)) && (article.isQuantityEqualsToOne())) {
+                articleCollection.remove(article);
+                return true;
+            }
+            if ((article.isItemCode(itemCode)) && (!article.isQuantityEqualsToOne())) {
+                article.decrementQuantity();
+                return true;
+            }
+        }
+        return false;
+    }
 }
