@@ -26,24 +26,20 @@ public class ShopBasket {
         articleCollection.add(item);
     }
 
-    public Price fetch(String itemCode) {
+    public Result fetch(String itemCode) {
         for (Article article : articleCollection) {
             if (article.isItemCode(itemCode)) {
-                return article.price();
+                return Result.articleFound(article.price());
             }
         }
-        return null;
+        return Result.articleNotFound(itemCode);
     }
-
 
     public boolean remove(String itemCode) {
         for (Article article : articleCollection) {
-            if ((article.isItemCode(itemCode)) && (article.isQuantityEqualsToOne())) {
-                articleCollection.remove(article);
-                return true;
-            }
-            if ((article.isItemCode(itemCode)) && (!article.isQuantityEqualsToOne())) {
-                article.decrementQuantity();
+            if (article.isItemCode(itemCode)) {
+                if (article.isQuantityEqualsToOne()) articleCollection.remove(article);
+                else article.decrementQuantity();
                 return true;
             }
         }

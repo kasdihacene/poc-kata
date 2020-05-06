@@ -28,6 +28,5 @@ public class Quantity {
 
     public void decrement() {
         this.quantity--;
-
     }
 }

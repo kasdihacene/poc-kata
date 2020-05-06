@@ -89,13 +89,25 @@ public class BasketTest {
 
     @Test
     public void returnsPriceOfAdidasShoesWhenItemCodeIsAdidas() {
-        Price actualResult = new Price(100);
+        Result actualResult = new FoundResult(new Price(100));
         Article article2 = Article.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
         Article article3 = Article.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
         List<Article> articleCollection = Arrays.asList(article2, article3);
         ShopBasket shopBasket = new ShopBasket(articleCollection);
         // ACT
-        Price expectedResult = shopBasket.fetch("Adidas");
+        Result expectedResult = shopBasket.fetch("Adidas");
+        assertThat(actualResult).isEqualTo(expectedResult);
+    }
+
+    @Test
+    public void returnsPriceOfAdidasShoesWhenItemCodeNotExists() {
+        Result actualResult = new NotFoundResult("Nike");
+        Article article2 = Article.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
+        Article article3 = Article.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        List<Article> articleCollection = Arrays.asList(article2, article3);
+        ShopBasket shopBasket = new ShopBasket(articleCollection);
+        // ACT
+        Result expectedResult = shopBasket.fetch("Nike");
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 
