@@ -1,6 +1,6 @@
 package com.mlaku.dev.kata.basketshop.visitor;
 
-import com.mlaku.dev.kata.basketshop.Sneakers;
+import com.mlaku.dev.kata.basketshop.articles.Sneakers;
 import com.mlaku.dev.kata.basketshop.articles.Dress;
 
 public abstract class Visitor {

@@ -2,13 +2,13 @@ package com.mlaku.dev.kata.basketshop.articles;
 
 import com.mlaku.dev.kata.basketshop.visitor.Visitor;
 
-public class Dress extends Article {
+public class Sneakers extends Article {
 
     private final String itemCode;
     private final Price price;
     private final Quantity quantity;
 
-    public Dress(String itemCode, Price price, Quantity quantity) {
+    public Sneakers(String itemCode, Price price, Quantity quantity) {
         this.itemCode = itemCode;
         this.price = price;
         this.quantity = quantity;
@@ -66,8 +66,8 @@ public class Dress extends Article {
             return this;
         }
 
-        public Dress build() {
-            return new Dress(itemCode, price, quantity);
+        public Sneakers build() {
+            return new Sneakers(itemCode, price, quantity);
         }
     }
 }

@@ -2,74 +2,19 @@ package com.mlaku.dev.kata.basketshop.articles;
 
 import com.mlaku.dev.kata.basketshop.visitor.Visitor;
 
-public class Article extends ArticleElement {
-    private String itemCode;
-    private Price price;
-    private Quantity quantity;
+public abstract class Article {
 
-    private Article(String itemCode, Price price, Quantity quantity) {
-        this.itemCode = itemCode;
-        this.price = price;
-        this.quantity = quantity;
-    }
+    public abstract int accept(Visitor visitor);
 
-    public Article() {
-    }
+    public abstract int calculateTotal();
 
-    public int calculateTotal() {
-        return price.calculateTotalPrice(this.quantity);
-    }
+    public abstract boolean isItemCode(String itemCode);
 
-    public static Builder instance() {
-        return new Builder();
-    }
+    public abstract Price price();
 
-    public boolean isItemCode(String itemCode) {
-        return itemCode.equals(this.itemCode);
-    }
+    public abstract boolean isQuantityEqualsToOne();
 
-    public Price price() {
-        return this.price;
-    }
+    public abstract void decrementQuantity();
 
-    public boolean isQuantityEqualsToOne() {
-        return this.quantity.equals(new Quantity(1));
-    }
 
-    public void decrementQuantity() {
-        this.quantity.decrement();
-    }
-
-    @Override
-    public int accept(Visitor visitor) {
-        return calculateTotal();
-    }
-
-    public static final class Builder {
-        private String itemCode;
-        private Price price;
-        private Quantity quantity;
-
-        private Builder() {
-        }
-
-        public Builder withItemCode(String itemCode) {
-            this.itemCode = itemCode;
-            return this;
-        }
-
-        public Builder withPrice(Price price) {
-            this.price = price;
-            return this;
-        }
-
-        public Builder withQuantity(Quantity quantity) {
-            this.quantity = quantity;
-            return this;
-        }
-
-        public Article build() {
-            return new Article(itemCode, price, quantity);
-        }
-    }
 }

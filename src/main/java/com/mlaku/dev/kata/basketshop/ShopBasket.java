@@ -3,6 +3,7 @@ package com.mlaku.dev.kata.basketshop;
 import com.mlaku.dev.kata.basketshop.articles.Article;
 import com.mlaku.dev.kata.basketshop.context.Result;
 import com.mlaku.dev.kata.basketshop.visitor.ConcreteVisitor;
+import com.mlaku.dev.kata.basketshop.visitor.ConcreteVisitorWithReduction;
 import com.mlaku.dev.kata.basketshop.visitor.Visitor;
 
 import java.util.ArrayList;
@@ -51,6 +52,19 @@ public class ShopBasket {
     }
 
     public int calculateWithoutReduction() {
+        Visitor visitor = new ConcreteVisitor();
+        return this.articleCollection.stream()
+                .map(article -> article.accept(visitor))
+                .reduce(0, Integer::sum);
+    }
+
+    public int calculateWithReduction() {
+        Visitor visitor = new ConcreteVisitorWithReduction();
+        return this.articleCollection.stream()
+                .map(article -> article.accept(visitor))
+                .reduce(0, Integer::sum);
+    }
+    public int calculateTotal(){
         Visitor visitor = new ConcreteVisitor();
         return this.articleCollection.stream()
                 .map(article -> article.accept(visitor))
