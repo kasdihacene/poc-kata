@@ -14,7 +14,6 @@ public abstract class Article {
         return price.calculateTotalPrice(this.quantity);
     }
 
-
     public boolean isItemCode(String itemCode) {
         return itemCode.equals(this.itemCode);
     }

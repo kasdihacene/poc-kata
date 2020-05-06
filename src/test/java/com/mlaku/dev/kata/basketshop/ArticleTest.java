@@ -74,4 +74,24 @@ public class ArticleTest {
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 
+
+    @Test
+    public void shouldReturnTotal400WhenHaving3DifferentArticles() {
+        // ARRANGE
+        int actualResult = 300;
+        Visitor visitor = new ConcreteVisitor();
+        ShopBasket shopBasket = new ShopBasket(visitor);
+        Article dress = Dress.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
+        Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
+        Article pant = Pant.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
+        shopBasket.addItem(dress);
+        shopBasket.addItem(sneakers);
+        shopBasket.addItem(pant);
+
+        // ACT
+        int expectedResult = shopBasket.calculateTotal();
+
+        // ASSERT
+        assertThat(actualResult).isEqualTo(expectedResult);
+    }
 }
