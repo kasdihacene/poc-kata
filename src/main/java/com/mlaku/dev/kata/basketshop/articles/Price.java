@@ -1,15 +1,15 @@
-package com.mlaku.dev.kata.basketshop;
+package com.mlaku.dev.kata.basketshop.articles;
 
 import java.util.Objects;
 
 public class Price {
-    private final int price;
-    public Price(int price) {
-        this.price = price;
+    private final int aPrice;
+    public Price(int aPrice) {
+        this.aPrice = aPrice;
     }
 
     int calculateTotalPrice(Quantity quantity) {
-        return quantity.calculateTotal(price);
+        return quantity.calculateTotal(aPrice);
     }
 
     @Override
@@ -17,18 +17,18 @@ public class Price {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Price price1 = (Price) o;
-        return price == price1.price;
+        return aPrice == price1.aPrice;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(price);
+        return Objects.hash(aPrice);
     }
 
     @Override
     public String toString() {
         return "Price{" +
-                "price=" + price +
+                "price=" + aPrice +
                 '}';
     }
 }

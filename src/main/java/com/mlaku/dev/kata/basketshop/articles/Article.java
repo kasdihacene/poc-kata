@@ -1,4 +1,4 @@
-package com.mlaku.dev.kata.basketshop;
+package com.mlaku.dev.kata.basketshop.articles;
 
 public class Article {
     private final String itemCode;
@@ -11,7 +11,7 @@ public class Article {
         this.quantity = quantity;
     }
 
-    int calculateTotal() {
+    public int calculateTotal() {
         return price.calculateTotalPrice(this.quantity);
     }
 
@@ -35,7 +35,7 @@ public class Article {
         this.quantity.decrement();
     }
 
-    protected static final class Builder {
+    public static final class Builder {
         private String itemCode;
         private Price price;
         private Quantity quantity;

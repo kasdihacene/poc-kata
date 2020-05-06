@@ -1,4 +1,4 @@
-package com.mlaku.dev.kata.basketshop;
+package com.mlaku.dev.kata.basketshop.context;
 
 import java.util.Objects;
 

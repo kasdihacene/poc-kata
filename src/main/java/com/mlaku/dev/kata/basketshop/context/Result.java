@@ -1,4 +1,6 @@
-package com.mlaku.dev.kata.basketshop;
+package com.mlaku.dev.kata.basketshop.context;
+
+import com.mlaku.dev.kata.basketshop.articles.Price;
 
 public abstract class Result {
 

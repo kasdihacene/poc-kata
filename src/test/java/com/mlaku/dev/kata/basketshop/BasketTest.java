@@ -1,5 +1,11 @@
 package com.mlaku.dev.kata.basketshop;
 
+import com.mlaku.dev.kata.basketshop.articles.Article;
+import com.mlaku.dev.kata.basketshop.articles.Price;
+import com.mlaku.dev.kata.basketshop.articles.Quantity;
+import com.mlaku.dev.kata.basketshop.context.FoundResult;
+import com.mlaku.dev.kata.basketshop.context.NotFoundResult;
+import com.mlaku.dev.kata.basketshop.context.Result;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -17,8 +23,7 @@ public class BasketTest {
         Quantity quantity = new Quantity(1);
         List<Article> articleCollection = Arrays.asList(Article.instance().withItemCode("SHOE").withPrice(price).withQuantity(quantity).build());
         ShopBasket shopBasket = new ShopBasket(articleCollection);
-        int result = shopBasket.totalBasket();
-        int expectedResult = result;
+        int expectedResult = shopBasket.totalBasket();
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 
@@ -29,8 +34,7 @@ public class BasketTest {
         Price price = new Price(20);
         Quantity quantity = new Quantity(2);
         List<Article> articleCollection = Arrays.asList(Article.instance().withItemCode("SHOE").withPrice(price).withQuantity(quantity).build());
-        int result = new ShopBasket(articleCollection).totalBasket();
-        int expectedResult = result;
+        int expectedResult = new ShopBasket(articleCollection).totalBasket();
         assertThat(actualResult).isEqualTo(expectedResult);
 
     }

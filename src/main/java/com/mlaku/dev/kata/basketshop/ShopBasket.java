@@ -1,5 +1,8 @@
 package com.mlaku.dev.kata.basketshop;
 
+import com.mlaku.dev.kata.basketshop.articles.Article;
+import com.mlaku.dev.kata.basketshop.context.Result;
+
 import java.util.ArrayList;
 import java.util.List;
 
