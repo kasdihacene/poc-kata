@@ -81,18 +81,6 @@ public class BasketTest {
     }
 
     @Test
-    public void returnsNewTotalAfterAddingNewArticlesAdidasShoesToTheCollection() {
-        int actualResult = 250;
-        ShopBasket shopBasket = new ShopBasket();
-        Article item1 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
-        Article item2 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(150)).withQuantity(new Quantity(1)).build();
-        shopBasket.addItem(item1);
-        shopBasket.addItem(item2);
-        int expectedResult = shopBasket.totalBasket();
-        assertThat(actualResult).isEqualTo(expectedResult);
-    }
-
-    @Test
     public void returnsPriceOfAdidasShoesWhenItemCodeIsAdidas() {
         Result actualResult = new FoundResult(new Price(100));
         Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();

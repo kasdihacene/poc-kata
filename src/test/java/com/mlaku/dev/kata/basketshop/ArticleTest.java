@@ -1,6 +1,9 @@
 package com.mlaku.dev.kata.basketshop;
 
 import com.mlaku.dev.kata.basketshop.articles.*;
+import com.mlaku.dev.kata.basketshop.visitor.ConcreteVisitor;
+import com.mlaku.dev.kata.basketshop.visitor.ConcreteVisitorWithReduction;
+import com.mlaku.dev.kata.basketshop.visitor.Visitor;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,8 +12,23 @@ public class ArticleTest {
 
 
     @Test
+    public void returnsNewTotalAfterAddingNewArticlesAdidasShoesToTheCollection() {
+        int actualResult = 250;
+        Visitor visitor = new ConcreteVisitor();
+        ShopBasket shopBasket = new ShopBasket(visitor);
+        Article item1 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
+        Article item2 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(150)).withQuantity(new Quantity(1)).build();
+        shopBasket.addItem(item1);
+        shopBasket.addItem(item2);
+        int expectedResult = shopBasket.totalBasket();
+        assertThat(actualResult).isEqualTo(expectedResult);
+    }
+
+    @Test
     public void shouldReturnTotal200WhenHaving2Articles() {
-        ShopBasket shopBasket = new ShopBasket();
+
+        Visitor visitor = new ConcreteVisitor();
+        ShopBasket shopBasket = new ShopBasket(visitor);
         Article dress = Dress.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
         Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
         shopBasket.addItem(dress);
@@ -24,7 +42,8 @@ public class ArticleTest {
     public void shouldReturnTotal300WhenHaving3Articles() {
         // ARRANGE
         int actualResult = 300;
-        ShopBasket shopBasket = new ShopBasket();
+        Visitor visitor = new ConcreteVisitor();
+        ShopBasket shopBasket = new ShopBasket(visitor);
         Article dress = Dress.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
         Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
         shopBasket.addItem(dress);
@@ -40,8 +59,9 @@ public class ArticleTest {
     @Test
     public void shouldReturnTotal300WhenHaving3ArticlesWithReduction() {
         // ARRANGE
-        int actualResult = 300;
-        ShopBasket shopBasket = new ShopBasket();
+        int actualResult = 2000;
+        Visitor visitor = new ConcreteVisitorWithReduction();
+        ShopBasket shopBasket = new ShopBasket(visitor);
         Article dress = Dress.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
         Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
         shopBasket.addItem(dress);

@@ -11,13 +11,15 @@ import java.util.List;
 
 public class ShopBasket {
 
+    private Visitor visitor;
     private List<Article> articleCollection;
 
     public ShopBasket(List<Article> articleCollection) {
         this.articleCollection = articleCollection;
     }
 
-    public ShopBasket() {
+    public ShopBasket(Visitor visitor) {
+        this.visitor = visitor;
         this.articleCollection = new ArrayList<>();
     }
 
@@ -65,7 +67,6 @@ public class ShopBasket {
                 .reduce(0, Integer::sum);
     }
     public int calculateTotal(){
-        Visitor visitor = new ConcreteVisitor();
         return this.articleCollection.stream()
                 .map(article -> article.accept(visitor))
                 .reduce(0, Integer::sum);
