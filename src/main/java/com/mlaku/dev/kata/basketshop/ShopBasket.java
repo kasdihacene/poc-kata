@@ -53,19 +53,6 @@ public class ShopBasket {
         return false;
     }
 
-    public int calculateWithoutReduction() {
-        Visitor visitor = new ConcreteVisitor();
-        return this.articleCollection.stream()
-                .map(article -> article.accept(visitor))
-                .reduce(0, Integer::sum);
-    }
-
-    public int calculateWithReduction() {
-        Visitor visitor = new ConcreteVisitorWithReduction();
-        return this.articleCollection.stream()
-                .map(article -> article.accept(visitor))
-                .reduce(0, Integer::sum);
-    }
     public int calculateTotal(){
         return this.articleCollection.stream()
                 .map(article -> article.accept(visitor))
