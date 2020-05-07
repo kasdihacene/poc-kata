@@ -2,6 +2,7 @@ package com.mlaku.dev.kata.basketshop;
 
 import com.mlaku.dev.kata.basketshop.articles.Article;
 import com.mlaku.dev.kata.basketshop.context.Result;
+import com.mlaku.dev.kata.basketshop.strategy.PaymentStrategy;
 import com.mlaku.dev.kata.basketshop.visitor.ConcreteVisitor;
 import com.mlaku.dev.kata.basketshop.visitor.ConcreteVisitorWithReduction;
 import com.mlaku.dev.kata.basketshop.visitor.Visitor;
@@ -57,5 +58,9 @@ public class ShopBasket {
         return this.articleCollection.stream()
                 .map(article -> article.accept(visitor))
                 .reduce(0, Integer::sum);
+    }
+
+    public boolean pay(PaymentStrategy strategy) {
+        return strategy.pay(calculateTotal());
     }
 }
