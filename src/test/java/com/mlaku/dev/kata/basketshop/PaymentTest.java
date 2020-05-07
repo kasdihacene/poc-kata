@@ -2,6 +2,7 @@ package com.mlaku.dev.kata.basketshop;
 
 import com.mlaku.dev.kata.basketshop.articles.*;
 import com.mlaku.dev.kata.basketshop.exceptions.EmptyBasketException;
+import com.mlaku.dev.kata.basketshop.exceptions.ZeroQuantityException;
 import com.mlaku.dev.kata.basketshop.strategy.PaymentCard;
 import com.mlaku.dev.kata.basketshop.strategy.PaymentPaypal;
 import com.mlaku.dev.kata.basketshop.strategy.PaymentStrategy;
@@ -50,19 +51,11 @@ public class PaymentTest {
         Assertions.assertThat(actualResult).isTrue();
     }
 
-    @Test(expected = EmptyBasketException.class)
-    public void shouldThrowsExceptionWhenPayingAnEmptyBasketWithCreditCard() throws EmptyBasketException {
+    @Test(expected = ZeroQuantityException.class)
+    public void shouldThrowsExceptionWhenPayingAnEmptyBasketWithCreditCard() {
 
-        // ARRANGE
-        Visitor visitor = new ConcreteVisitor();
-        ShopBasket shopBasket = new ShopBasket(visitor);
-        PaymentStrategy strategy = new PaymentCard("1878HK", 2020, "Hacene company");
+         Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(0)).build();
 
-        Article sneakers = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(0)).build();
-        shopBasket.addItem(sneakers);
-
-        //ACT
-        shopBasket.pay(strategy);
     }
 
 }

@@ -8,7 +8,7 @@ import com.mlaku.dev.kata.basketshop.context.ExceptionResult;
 import com.mlaku.dev.kata.basketshop.context.FoundResult;
 import com.mlaku.dev.kata.basketshop.context.NotFoundResult;
 import com.mlaku.dev.kata.basketshop.context.Result;
-import com.mlaku.dev.kata.basketshop.exceptions.EmptyBasketException;
+import com.mlaku.dev.kata.basketshop.exceptions.ZeroQuantityException;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -167,7 +167,6 @@ public class BasketTest {
         int expectedResultTotal = shopBasket.totalBasket();
         assertThat(actualResult).isEqualTo(expectedResultTotal);
     }
-
 
 
 }
