@@ -23,7 +23,7 @@ public abstract class Article {
     }
 
     public boolean isQuantityEqualsToOne() {
-        return this.quantity.equals(new Quantity(1));
+        return this.quantity.equals(Quantity.factory(1));
     }
 
     public void decrementQuantity() {

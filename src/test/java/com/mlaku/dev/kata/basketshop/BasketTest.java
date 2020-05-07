@@ -8,7 +8,6 @@ import com.mlaku.dev.kata.basketshop.context.ExceptionResult;
 import com.mlaku.dev.kata.basketshop.context.FoundResult;
 import com.mlaku.dev.kata.basketshop.context.NotFoundResult;
 import com.mlaku.dev.kata.basketshop.context.Result;
-import com.mlaku.dev.kata.basketshop.exceptions.ZeroQuantityException;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -23,8 +22,8 @@ public class BasketTest {
     public void shouldReturnThePriceWhenHavingOneArticle() {
 
         int actualResult = 20;
-        Price price = new Price(20);
-        Quantity quantity = new Quantity(1);
+        Price price = Price.factory(20);
+        Quantity quantity = Quantity.factory(1);
         List<Article> articleCollection = Arrays.asList(Sneakers.instance().withItemCode("SHOE").withPrice(price).withQuantity(quantity).build());
         ShopBasket shopBasket = new ShopBasket(articleCollection);
         int expectedResult = shopBasket.totalBasket();
@@ -35,8 +34,8 @@ public class BasketTest {
     public void shouldReturnThePriceWhenHavingTheSameArticleTwoTimes() {
 
         int actualResult = 40;
-        Price price = new Price(20);
-        Quantity quantity = new Quantity(2);
+        Price price = Price.factory(20);
+        Quantity quantity = Quantity.factory(2);
         List<Article> articleCollection = Arrays.asList(Sneakers.instance().withItemCode("SHOE").withPrice(price).withQuantity(quantity).build());
         int expectedResult = new ShopBasket(articleCollection).totalBasket();
         assertThat(actualResult).isEqualTo(expectedResult);
@@ -47,9 +46,9 @@ public class BasketTest {
     public void shouldReturn120AsTotalPriceOfArticlesInBasket() {
         // ARRANGE
         int actualResult = 120;
-        Article article1 = Sneakers.instance().withItemCode("SHOE").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
-        Article article2 = Sneakers.instance().withItemCode("SHOE").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
-        Article article3 = Sneakers.instance().withItemCode("SHOE").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        Article article1 = Sneakers.instance().withItemCode("SHOE").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
+        Article article2 = Sneakers.instance().withItemCode("SHOE").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
+        Article article3 = Sneakers.instance().withItemCode("SHOE").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
         List<Article> articleCollection = Arrays.asList(article1, article2, article3);
         // ACT
         int expectedResult = new ShopBasket(articleCollection).totalBasket();
@@ -61,8 +60,8 @@ public class BasketTest {
     public void shouldReturn80AsTotalPriceOfArticlesInBasket() {
         // ARRANGE
         int actualResult = 80;
-        Article article2 = Sneakers.instance().withItemCode("SANDAL").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
-        Article article3 = Sneakers.instance().withItemCode("SHOE").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        Article article2 = Sneakers.instance().withItemCode("SANDAL").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
+        Article article3 = Sneakers.instance().withItemCode("SHOE").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
         List<Article> articleCollection = Arrays.asList(article2, article3);
         // ACT
         int expectedResult = new ShopBasket(articleCollection).totalBasket();
@@ -74,8 +73,8 @@ public class BasketTest {
     public void shouldReturn100AsTotalPriceOfShoeAndOtherArticleInBasket() {
         // ARRANGE
         int actualResult = 100;
-        Article article2 = Sneakers.instance().withItemCode("SANDAL").withPrice(new Price(30)).withQuantity(new Quantity(2)).build();
-        Article article3 = Sneakers.instance().withItemCode("SHOE").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        Article article2 = Sneakers.instance().withItemCode("SANDAL").withPrice(Price.factory(30)).withQuantity(Quantity.factory(2)).build();
+        Article article3 = Sneakers.instance().withItemCode("SHOE").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
         List<Article> articleCollection = Arrays.asList(article2, article3);
         // ACT
         int expectedResult = new ShopBasket(articleCollection).totalBasket();
@@ -85,9 +84,9 @@ public class BasketTest {
 
     @Test
     public void returnsPriceOfAdidasShoesWhenItemCodeIsAdidas() {
-        Result actualResult = new FoundResult(new Price(100));
-        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
-        Article article3 = Sneakers.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        Result actualResult = new FoundResult(Price.factory(100));
+        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(Price.factory(100)).withQuantity(Quantity.factory(2)).build();
+        Article article3 = Sneakers.instance().withItemCode("Rebook").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
         List<Article> articleCollection = Arrays.asList(article2, article3);
         ShopBasket shopBasket = new ShopBasket(articleCollection);
         // ACT
@@ -108,8 +107,8 @@ public class BasketTest {
     @Test
     public void returnsPriceOfAdidasShoesWhenItemCodeNotExists() {
         Result actualResult = new NotFoundResult("Nike");
-        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
-        Article article3 = Sneakers.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(Price.factory(100)).withQuantity(Quantity.factory(2)).build();
+        Article article3 = Sneakers.instance().withItemCode("Rebook").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
         List<Article> articleCollection = Arrays.asList(article2, article3);
         ShopBasket shopBasket = new ShopBasket(articleCollection);
         // ACT
@@ -120,8 +119,8 @@ public class BasketTest {
     @Test
     public void shouldReturnTrueWhenRemovingAPairOfAdidasShoes() {
 
-        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
-        Article article3 = Sneakers.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(Price.factory(100)).withQuantity(Quantity.factory(2)).build();
+        Article article3 = Sneakers.instance().withItemCode("Rebook").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
         List<Article> articleCollection = Arrays.asList(article2, article3);
         ShopBasket shopBasket = new ShopBasket(articleCollection);
         int actualResult = 140;
@@ -137,8 +136,8 @@ public class BasketTest {
     @Test
     public void shouldReturnTrueWhenRemovingOnePairOfAdidasShoes() {
 
-        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
-        Article article3 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
+        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(Price.factory(100)).withQuantity(Quantity.factory(2)).build();
+        Article article3 = Sneakers.instance().withItemCode("Adidas").withPrice(Price.factory(100)).withQuantity(Quantity.factory(2)).build();
         List<Article> articleCollection = Arrays.asList(article2, article3);
         ShopBasket shopBasket = new ShopBasket(articleCollection);
         int actualResult = 300;
@@ -154,8 +153,8 @@ public class BasketTest {
     @Test
     public void shouldReturnFalseWhenRemovingABrandOfShoesThatDoesntExist() {
 
-        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
-        Article article3 = Sneakers.instance().withItemCode("Rebook").withPrice(new Price(20)).withQuantity(new Quantity(2)).build();
+        Article article2 = Sneakers.instance().withItemCode("Adidas").withPrice(Price.factory(100)).withQuantity(Quantity.factory(2)).build();
+        Article article3 = Sneakers.instance().withItemCode("Rebook").withPrice(Price.factory(20)).withQuantity(Quantity.factory(2)).build();
         List<Article> articleCollection = Arrays.asList(article2, article3);
         ShopBasket shopBasket = new ShopBasket(articleCollection);
         int actualResult = 240;

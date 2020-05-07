@@ -4,8 +4,12 @@ import java.util.Objects;
 
 public class Price {
     private final int aPrice;
-    public Price(int aPrice) {
+    private Price(int aPrice) {
         this.aPrice = aPrice;
+    }
+
+    public static Price factory(int aPrice) {
+        return new Price(aPrice);
     }
 
     int calculateTotalPrice(Quantity quantity) {

@@ -16,8 +16,8 @@ public class ArticleTest {
         int actualResult = 250;
         Visitor visitor = new ConcreteVisitor();
         ShopBasket shopBasket = new ShopBasket(visitor);
-        Article item1 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
-        Article item2 = Sneakers.instance().withItemCode("Adidas").withPrice(new Price(150)).withQuantity(new Quantity(1)).build();
+        Article item1 = Sneakers.instance().withItemCode("Adidas").withPrice(Price.factory(100)).withQuantity(Quantity.factory(1)).build();
+        Article item2 = Sneakers.instance().withItemCode("Adidas").withPrice(Price.factory(150)).withQuantity(Quantity.factory(1)).build();
         shopBasket.addItem(item1);
         shopBasket.addItem(item2);
         int expectedResult = shopBasket.totalBasket();
@@ -29,8 +29,8 @@ public class ArticleTest {
 
         Visitor visitor = new ConcreteVisitor();
         ShopBasket shopBasket = new ShopBasket(visitor);
-        Article dress = Dress.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
-        Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
+        Article dress = Dress.instance().withItemCode("dress").withPrice(Price.factory(100)).withQuantity(Quantity.factory(1)).build();
+        Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(Price.factory(100)).withQuantity(Quantity.factory(1)).build();
         shopBasket.addItem(dress);
         shopBasket.addItem(sneakers);
         int expectedResult = shopBasket.calculateTotal();
@@ -44,8 +44,8 @@ public class ArticleTest {
         int actualResult = 300;
         Visitor visitor = new ConcreteVisitor();
         ShopBasket shopBasket = new ShopBasket(visitor);
-        Article dress = Dress.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
-        Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
+        Article dress = Dress.instance().withItemCode("dress").withPrice(Price.factory(100)).withQuantity(Quantity.factory(2)).build();
+        Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(Price.factory(100)).withQuantity(Quantity.factory(1)).build();
         shopBasket.addItem(dress);
         shopBasket.addItem(sneakers);
 
@@ -62,8 +62,8 @@ public class ArticleTest {
         int actualResult = 2000;
         Visitor visitor = new ConcreteVisitorWithReduction();
         ShopBasket shopBasket = new ShopBasket(visitor);
-        Article dress = Dress.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(2)).build();
-        Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
+        Article dress = Dress.instance().withItemCode("dress").withPrice(Price.factory(100)).withQuantity(Quantity.factory(2)).build();
+        Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(Price.factory(100)).withQuantity(Quantity.factory(1)).build();
         shopBasket.addItem(dress);
         shopBasket.addItem(sneakers);
 
@@ -81,9 +81,9 @@ public class ArticleTest {
         int actualResult = 300;
         Visitor visitor = new ConcreteVisitor();
         ShopBasket shopBasket = new ShopBasket(visitor);
-        Article dress = Dress.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
-        Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
-        Article pant = Pant.instance().withItemCode("dress").withPrice(new Price(100)).withQuantity(new Quantity(1)).build();
+        Article dress = Dress.instance().withItemCode("dress").withPrice(Price.factory(100)).withQuantity(Quantity.factory(1)).build();
+        Article sneakers = Sneakers.instance().withItemCode("dress").withPrice(Price.factory(100)).withQuantity(Quantity.factory(1)).build();
+        Article pant = Pant.instance().withItemCode("dress").withPrice(Price.factory(100)).withQuantity(Quantity.factory(1)).build();
         shopBasket.addItem(dress);
         shopBasket.addItem(sneakers);
         shopBasket.addItem(pant);

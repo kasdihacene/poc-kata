@@ -7,10 +7,14 @@ import java.util.Objects;
 public class Quantity {
     private int aQuantity;
 
-    public Quantity(int aQuantity) {
+    private Quantity(int aQuantity) {
         // Unchecked exception
         if (aQuantity == 0) throw new ZeroQuantityException("quantity should not be equal to zero");
         this.aQuantity = aQuantity;
+    }
+
+    public static Quantity factory(int aQuantity) {
+        return new Quantity(aQuantity);
     }
 
     public int calculateTotal(int price) {
