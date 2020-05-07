@@ -4,11 +4,14 @@ import com.mlaku.dev.kata.basketshop.articles.Article;
 import com.mlaku.dev.kata.basketshop.articles.Price;
 import com.mlaku.dev.kata.basketshop.articles.Quantity;
 import com.mlaku.dev.kata.basketshop.articles.Sneakers;
+import com.mlaku.dev.kata.basketshop.context.ExceptionResult;
 import com.mlaku.dev.kata.basketshop.context.FoundResult;
 import com.mlaku.dev.kata.basketshop.context.NotFoundResult;
 import com.mlaku.dev.kata.basketshop.context.Result;
+import com.mlaku.dev.kata.basketshop.exceptions.EmptyBasketException;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -89,6 +92,16 @@ public class BasketTest {
         ShopBasket shopBasket = new ShopBasket(articleCollection);
         // ACT
         Result expectedResult = shopBasket.fetch("Adidas");
+        assertThat(actualResult).isEqualTo(expectedResult);
+    }
+
+    @Test
+    public void returnsExceptionResultWhenHavingAnEmptyListArticles() {
+        String itemCode = "Adidas";
+        Result actualResult = new ExceptionResult(itemCode);
+        ShopBasket shopBasket = new ShopBasket(new ArrayList<>());
+        // ACT
+        Result expectedResult = shopBasket.fetch(itemCode);
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 

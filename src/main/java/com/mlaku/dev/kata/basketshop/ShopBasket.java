@@ -1,6 +1,7 @@
 package com.mlaku.dev.kata.basketshop;
 
 import com.mlaku.dev.kata.basketshop.articles.Article;
+import com.mlaku.dev.kata.basketshop.context.ExceptionResult;
 import com.mlaku.dev.kata.basketshop.context.Result;
 import com.mlaku.dev.kata.basketshop.exceptions.EmptyBasketException;
 import com.mlaku.dev.kata.basketshop.strategy.PaymentStrategy;
@@ -34,6 +35,8 @@ public class ShopBasket {
     }
 
     public Result fetch(String itemCode) {
+        if (articleCollection.isEmpty()) return new ExceptionResult(itemCode);
+
         for (Article article : articleCollection) {
             if (article.isItemCode(itemCode)) {
                 return Result.articleFound(article.price());
