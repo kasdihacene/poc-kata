@@ -53,9 +53,7 @@ public class PaymentTest {
 
     @Test(expected = ZeroQuantityException.class)
     public void shouldThrowsExceptionWhenPayingAnEmptyBasketWithCreditCard() {
-
-         Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(0)).build();
-
+        Sneakers.instance().withItemCode("Adidas").withPrice(new Price(100)).withQuantity(new Quantity(0)).build();
     }
 
 }

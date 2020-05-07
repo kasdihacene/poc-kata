@@ -62,8 +62,7 @@ public class ShopBasket {
     }
 
     public boolean pay(PaymentStrategy strategy) throws EmptyBasketException {
-        if ((articleCollection.isEmpty()) || (this.calculateTotal() == 0))
-            throw new EmptyBasketException("The basket is empty");
+        if (articleCollection.isEmpty()) throw new EmptyBasketException("The basket is empty");
         return strategy.pay(calculateTotal());
     }
 }
