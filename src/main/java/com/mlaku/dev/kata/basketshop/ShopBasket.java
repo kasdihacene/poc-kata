@@ -37,12 +37,11 @@ public class ShopBasket {
     public Result fetch(String itemCode) {
         if (articleCollection.isEmpty()) return Result.exception(itemCode);
 
-        for (Article article : articleCollection) {
-            if (article.isItemCode(itemCode)) {
-                return Result.articleFound(article.price());
-            }
-        }
-        return Result.articleNotFound(itemCode);
+        return articleCollection.stream()
+                .filter(article -> article.isItemCode(itemCode))
+                .map(article -> Result.articleFound(article.price()))
+                .findFirst().orElse(Result.articleNotFound(itemCode));
+
     }
 
     public boolean remove(String itemCode) {
