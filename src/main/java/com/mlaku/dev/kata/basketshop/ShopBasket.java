@@ -2,9 +2,8 @@ package com.mlaku.dev.kata.basketshop;
 
 import com.mlaku.dev.kata.basketshop.articles.Article;
 import com.mlaku.dev.kata.basketshop.context.Result;
+import com.mlaku.dev.kata.basketshop.exceptions.EmptyBasketException;
 import com.mlaku.dev.kata.basketshop.strategy.PaymentStrategy;
-import com.mlaku.dev.kata.basketshop.visitor.ConcreteVisitor;
-import com.mlaku.dev.kata.basketshop.visitor.ConcreteVisitorWithReduction;
 import com.mlaku.dev.kata.basketshop.visitor.Visitor;
 
 import java.util.ArrayList;
@@ -54,13 +53,15 @@ public class ShopBasket {
         return false;
     }
 
-    public int calculateTotal(){
+    public int calculateTotal() {
         return this.articleCollection.stream()
                 .map(article -> article.accept(visitor))
                 .reduce(0, Integer::sum);
     }
 
-    public boolean pay(PaymentStrategy strategy) {
+    public boolean pay(PaymentStrategy strategy) throws EmptyBasketException {
+        if ((articleCollection.isEmpty()) || (this.calculateTotal() == 0))
+            throw new EmptyBasketException("The basket is empty");
         return strategy.pay(calculateTotal());
     }
 }
