@@ -2,6 +2,7 @@ package com.mlaku.dev.kata.basketshop;
 
 import com.mlaku.dev.kata.basketshop.articles.*;
 import com.mlaku.dev.kata.basketshop.exceptions.EmptyBasketException;
+import com.mlaku.dev.kata.basketshop.strategy.PaymentCard;
 import com.mlaku.dev.kata.basketshop.strategy.PaymentPaypal;
 import com.mlaku.dev.kata.basketshop.strategy.PaymentStrategy;
 import com.mlaku.dev.kata.basketshop.visitor.ConcreteVisitor;

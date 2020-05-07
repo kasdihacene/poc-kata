@@ -7,6 +7,7 @@ public class ExceptionResult extends Result {
     private String itemCode;
 
     public ExceptionResult(String itemCode) {
+        super();
         this.itemCode = itemCode;
     }
 

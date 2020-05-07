@@ -35,7 +35,7 @@ public class ShopBasket {
     }
 
     public Result fetch(String itemCode) {
-        if (articleCollection.isEmpty()) return new ExceptionResult(itemCode);
+        if (articleCollection.isEmpty()) return Result.exception(itemCode);
 
         for (Article article : articleCollection) {
             if (article.isItemCode(itemCode)) {

@@ -12,4 +12,8 @@ public abstract class Result {
         return new NotFoundResult(itemCode);
     }
 
+    public static Result exception(String itemCode){
+        return new ExceptionResult(itemCode);
+    }
+
 }

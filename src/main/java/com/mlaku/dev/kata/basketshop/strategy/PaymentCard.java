@@ -1,6 +1,4 @@
-package com.mlaku.dev.kata.basketshop;
-
-import com.mlaku.dev.kata.basketshop.strategy.PaymentStrategy;
+package com.mlaku.dev.kata.basketshop.strategy;
 
 public class PaymentCard implements PaymentStrategy {
     private final String id;
@@ -15,7 +13,7 @@ public class PaymentCard implements PaymentStrategy {
 
     @Override
     public boolean pay(int total) {
-        String message = String.format("The payment was done with Credit Card - amount : %s £ - company : %s",total,this.company);
+        String message = String.format("The payment was done with Credit Card - amount : %s £ - company : %s", total, this.company);
         System.out.println(message);
         return true;
     }
